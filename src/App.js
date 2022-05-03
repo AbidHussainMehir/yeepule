@@ -1,23 +1,19 @@
-import logo from './logo.svg';
+import Dashboard from "./pages/Dashboard"
+import { Provider } from "react-redux";
+import store from "./store";
 import './App.css';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "./assets/css/usercss.css"
+import "./assets/css/trading.css"
+import "./assets/css/NewUserPannel.css"
+import "./assets/css/Member.css"
+import "./assets/css/usercss.css"
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Provider store={store}>
+        <Dashboard />
+      </Provider>
     </div>
   );
 }
