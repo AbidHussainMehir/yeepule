@@ -1,84 +1,342 @@
 
 const Dashboard = () => {
     return (
-        <div id="member-layout" class="page-container">
-            <div className="left-panel left-panel2">
-                <div className="close-panel">
-                    <i className="fa fa-times close_button" aria-hidden="true"></i>
-                </div>
-                <div className="wdg-divider"></div>
-                <div className="wdg-logo">
-                    <a href="index.html">
-                        <img src="assets/images/logo.png" style={{ width: "100px", marginTop: "60px" }} />
+        <div class="content-wrapper">
+        <link rel="stylesheet" type="text/css" href="assets/css/NewUserPannel.css"/>	    
+        <section class="maindsb">
+            <div class="container">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="item">
+                            <a href="https://www.wyshopping.life/" target="_blank">
+                                <img src="assets/images/banner/12.jpg" alt="d-app banner -1" style={{width:"100%"}}/>
+                            </a>
+                        </div>
+
+                        <div class="item active">
+                            <a href="https://www.wyshopping.life/" target="_blank">
+                                <img src="assets/images/banner/8.jpg" alt="d-app banner -2" style={{width:"100%"}}/>
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="https://www.wyshopping.life/" target="_blank">
+                                <img src="assets/images/banner/9.jpg" alt="d-app banner -3" style={{width:"100%"}}/>
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="https://www.wyshopping.life/" target="_blank">
+                                <img src="assets/images/banner/10.jpg" alt="d-app banner -4" style={{width:"100%"}}/>
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="https://www.wyshopping.life/" target="_blank">
+                                <img src="assets/images/banner/11.jpg" alt="d-app banner -5" style={{width:"100%"}}/>
+                            </a>
+                        </div>
+                    </div>
+
+                    <a class="left carousel-control indicator_set" href="#myCarousel" data-slide="prev">
+                        <span class=" indicator_set glyphicon fa fa-chevron-circle-left"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control indicator_set" href="#myCarousel" data-slide="next">
+                        <span class=" indicator_set glyphicon fa fa-chevron-circle-right"></span>
+                        <span class="sr-only">Next</span>
                     </a>
                 </div>
-                <div className="wdg-divider"></div>
-                <div>
-                    <div className="wdg-avatar" onclick="window.open('index.html', '_self' )"></div>
-                    <div className="wdg-user">
-                        <input type="hidden" id="HiddenField1UserAccount" value="TL8p3KVhZj6Gu59zh8bF6WregzGFpJSgL9" autocomplete="off" />
-                        <span className="user-label">Member ID:</span>
-                        <span className="user-id" id="" style={{ color: "#fbc50b" }}>100 </span>
-                    </div>
+            </div>
+        </section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="DailyYeild.html">
+                        <div class="box features-1">
+                            <div class="gen-comp-plan">
+
+                                <div class="gcp-description">
+                                    <div class="gcp-title">
+                                        Daily Yeild
+                                    </div>
+                                    <div class="gcp-income">
+                                        <span class="cur1">4418.1702  </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-                <div className="wdg-divider"></div>
-                <div className="wdg-stats">
-                    <div className="stats-box-icon text-center">
-
-                        <i className="fa fa-users"></i>
-                    </div>
-                    <div className="stats-box">
-                        <div className="stats-value">22990</div>
-                        <div className="stats-label">All participants:</div>
-                    </div>
-
-                    <div className="stats-box">
-                        <div className="stats-value">0</div>
-                        <div className="stats-label">Joined in 24 hour:</div>
-                    </div>
-                    <div className="stats-box">
-                        <div className="stats-value">115728058.0970</div>
-
-                        <div className="stats-label">Participants have earned ULE:</div>
-                    </div>
-                    <div className="stats-box">
-                        <div className="stats-value">7540711.8020</div>
-
-                        <div className="stats-label">Participants have earned USD:</div>
-                    </div>
+                <div class="col-md-3">
+                    <a href="TeamDY.html">
+                        <div class="box features-1">
+                            <div class="gen-comp-plan">
+                                <div class="gcp-description">
+                                    <div class="gcp-title">
+                                        Team DY
+                                    </div>
+                                    <div class="gcp-income">
+                                        <span class="cur1">0.0000  </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-
-                <div className="wdg-divider"></div>
-                <div className="wdg-links">
-                    <div className="wdg-label">Affiliate Link:</div>
-                    <div className="wdg-box bxset primary">
-                        <input type="text" className="wdg-input-box" id="myInput1" readonly="" value="http://d-app.network/registration?referrallink=100" />
-                        <div className="fast-msg-box"></div>
-                    </div>
-                    <div className="wdg-actions">
-                        <button type="button" onclick="myFunction1()">
-                            <i className="fa fa-clipboard"></i>
-                            <span>Copy</span>
-                        </button>
-                        {/* <script>
-	                    function myFunction1() {
-	                        var copyText = document.getElementById("myInput1");
-	                        copyText.select();
-	                        copyText.setSelectionRange(0, 99999)
-	                        document.execCommand("copy");
-	                    }
-	                </script> */}
-                    </div>
+                <div class="col-md-3">
+                    <a href="ReferralEarning.html">
+                        <div class="box features-1">
+                            <div class="gen-comp-plan">
+                                <div class="gcp-description">
+                                    <div class="gcp-title">
+                                        Referral Earning
+                                    </div>
+                                    <div class="gcp-income">
+                                        <span class="cur1">0.0000  </span>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-
-                <div className="wdg-links">
-                    <div className="wdg-label">Wallet  Address:</div>
-                    <div className="wdg-box bxset primary">
-                        <input type="text" onclick="window.open('https://tronscan.org/#/address/TL8p3KVhZj6Gu59zh8bF6WregzGFpJSgL9/transactions','_blank')" className="wdg-input-box cursorset" id="myInput1" readonly="" value="TL8p3KVhZj6Gu59zh8bF6WregzGFpJSgL9" />
-                    </div>
+                <div class="col-md-3">
+                    <a href="myTeam.html">
+                        <div class="box features-1">
+                            <div class="gen-comp-plan">
+                                <div class="gcp-description">
+                                    <div class="gcp-title">
+                                        My Team
+                                    </div>
+                                    <div class="gcp-income">
+                                        <span class="cur1">Active 0 /In-Active 1</span>
+                                        <input type="hidden" id="jj" autocomplete="off"/>
+                                        <input type="hidden" id="u" autocomplete="off"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="MyReferral.html">
+                        <div class="box features-1">
+                            <div class="gen-comp-plan">
+                                <div class="gcp-description">
+                                    <div class="gcp-title">
+                                        My Referral
+                                    </div>
+                                    <div class="gcp-income">
+                                        <span class="cur1">Active 0 /In-Active 1</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="PoolIncome.html">
+                        <div class="box features-1">
+                            <div class="gen-comp-plan">
+                                <div class="gcp-description">
+                                    <div class="gcp-title">
+                                        Total Pool Income
+                                    </div>
+                                    <div class="gcp-income">
+                                        <span class="cur1">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="PoolIncome.html">
+                        <div class="box features-1">
+                            <div class="gen-comp-plan">
+                                <div class="gcp-description">
+                                    <div class="gcp-title">
+                                        Pool Income 1
+                                    </div>
+                                    <div class="gcp-income">
+                                        <span class="cur1">104.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="PoolIncome.html">
+                        <div class="box features-1">
+                            <div class="gen-comp-plan">
+                                <div class="gcp-description">
+                                    <div class="gcp-title">
+                                        Pool Income 2
+                                    </div>
+                                    <div class="gcp-income">
+                                        <span class="cur1">0.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="PoolIncome.html">
+                        <div class="box features-1">
+                            <div class="gen-comp-plan">
+                                <div class="gcp-description">
+                                    <div class="gcp-title">
+                                        Pool Income 3
+                                    </div>
+                                    <div class="gcp-income">
+                                        <span class="cur1">0.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="BonusDY.html">
+                        <div class="box features-1">
+                            <div class="gen-comp-plan">
+                                <div class="gcp-description">
+                                    <div class="gcp-title">
+                                        Bonus DY
+                                    </div>
+                                    <div class="gcp-income">
+                                        <span class="cur1">0.50</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="withdrawal.html">
+                        <div class="box features-1">
+                            <div class="gen-comp-plan">
+                                <div class="gcp-description">
+                                    <div class="gcp-title">
+                                        Withdrawal
+                                    </div>
+                                    <div class="gcp-income">
+                                        <span class="cur1">4415.6100</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="#">
+                        <div class="box features-1">
+                            <div class="gen-comp-plan">
+                                <div class="gcp-description">
+                                    <div class="gcp-title">
+                                        Total Downline Business
+                                    </div>
+                                    <div class="gcp-income">
+                                        <span class="cur1">38400.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="swap_heading">
+                        <h2>Want to be Swap ? Select Swap according to Chain Now<span class="blink_me"> <i class="fa fa-mars"></i></span></h2>
+                    </div>
+                    <div class="exbox ">
+                        <a href="https://sunswap.com/#/scanold/detail/TEQuSBH1jxGzqJfZSQx8tusHrLaKobnRZz" target="_blank">
+                            <div class="rate juslogoset">
+                                <span><img src="assets/images/Icon/sunswapName.png"/> </span>
+
+                            </div>
+                        </a>
+                        <a href="https://wyzthswap.org/home" target="_blank">
+                            <div class="rate juslogoset mrlrset">
+                                <span><img src="assets/images/Icon/raydiumswap.png"/> </span>
+
+                            </div>
+                        </a>
+                        <a href="https://justlend.org/#/home" target="_blank">
+                            <div class="rate juslogoset">
+                                <span><img src="assets/images/Icon/wyzswap.png"/> </span>
+
+                            </div>
+                        </a>
+                        <a href="https://justlend.org/#/home" target="_blank">
+                            <div class="rate juslogoset">
+                                <span><img src="assets/images/Icon/quickswapWithName.png"/> </span>
+
+                            </div>
+                        </a>
+                        <a href="https://justlend.org/#/home" target="_blank">
+                            <div class="rate juslogoset">
+                                <span><img src="assets/images/Icon/pancakeswapName.png"/> </span>
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <br/><br/>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="prgs">
+                        <div id="myProgress">
+                            <div id="myBar" style={{width: "100%", backgroundColor: "red"}}></div>
+                        </div>
+                    </div>
+                    <div style={{color:"#000", fontWeight:"400"}}> Your total earning is 300.0000 USD out of 300.0000 USD (Your earned 100.0000% out of 300% of your investment )</div>
+{/* 
+                    <style>
+
+
+                        #myProgress {
+                            width: 100%;
+                            background-color: lightblue;
+                        }
+
+                        #myBar {
+                            width: 1%;
+                            height: 30px;
+                            background: #656262 !important;
+                        }
+                    </style>
+                    <script>
+                        $(document).ready(function () {
+                            move();
+                        });
+                        var i = 0;
+                        function move() {
+                            if (i == 0) {
+                                i = 1;
+                                var elem = document.getElementById("myBar");
+                                var width =100.0000  ;
+                                elem.style.width = width + "%";
+                                if (width > 90) {
+                                    elem.style.backgroundColor = "red";
+                                }
+                                else {
+                                    elem.style.backgroundColor = "green";
+                                }
+                                
+                            }
+                        }
+
+                    </script> */}
+
+                </div>
+            </div>
+        </div>
+    </div>
     );
 }
 

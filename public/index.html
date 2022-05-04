@@ -29,7 +29,39 @@
     <link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  
+    <script>
+	    $('.close-panel .close_button').click(function () {
+
+	        $(this).parents('.left-panel').fadeOut();
+	    });
+
+	    $('.fa-sliders').click(function () {
+	        $('.left-panel').fadeIn();
+	    });
+
+	    $('.toggle-menu').click(function () {
+	        $('#main-menu').fadeToggle();
+	    });
+
+	</script>
+
+	<script type="text/javascript">
+	    $(document).ready(function () {
+	        var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+	        //alert(isMobile)
+	        if (isMobile) {
+	            $('.left-panel').fadeIn();
+	            $('.left-panel').hide();
+	        } else {
+	           
+	        }
+	        
+	    });
+	</script>
+   <style>
 
         a {
             text-decoration: none !important;
