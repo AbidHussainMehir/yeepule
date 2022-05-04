@@ -5,7 +5,7 @@ import {
     , getBonusDy, getReferralEarning, getPools, getWithdrawal, getDownlineBusiness
 } from "../../store/actions/dashboard"
 const Dashboard = () => {
-    const state = useSelector(state => state)
+    const dashboard = useSelector(state => state?.dashboard)
     const dispatch = useDispatch();
     const getAllData = () => {
         dispatch(getWalletAddress('100'));
@@ -22,7 +22,7 @@ const Dashboard = () => {
     useEffect(() => {
         getAllData()
     }, [])
-    console.log("state", state)
+    console.log("state", dashboard)
     return (
         <div class="content-wrapper">
             <link rel="stylesheet" type="text/css" href="assets/css/NewUserPannel.css" />
@@ -81,7 +81,7 @@ const Dashboard = () => {
                                             Daily Yeild
                                         </div>
                                         <div class="gcp-income">
-                                            <span class="cur1">4418.1702  </span>
+                                            <span class="cur1">{parseFloat(dashboard?.dailyYeild ? dashboard?.dailyYeild : 0).toFixed(4)}  </span>
                                         </div>
                                     </div>
                                 </div>
@@ -97,7 +97,7 @@ const Dashboard = () => {
                                             Team DY
                                         </div>
                                         <div class="gcp-income">
-                                            <span class="cur1">0.0000  </span>
+                                            <span class="cur1">{parseFloat(dashboard?.teamDy ? dashboard?.teamDy : 0).toFixed(4)}  </span>
                                         </div>
                                     </div>
                                 </div>
@@ -113,7 +113,9 @@ const Dashboard = () => {
                                             Referral Earning
                                         </div>
                                         <div class="gcp-income">
-                                            <span class="cur1">0.0000  </span>
+                                            <span class="cur1">
+                                                {parseFloat(dashboard?.referralEearnig ? dashboard?.referralEearnig : 0).toFixed(4)}
+                                            </span>
 
                                         </div>
                                     </div>
@@ -164,7 +166,8 @@ const Dashboard = () => {
                                             Total Pool Income
                                         </div>
                                         <div class="gcp-income">
-                                            <span class="cur1">0</span>
+                                            <span class="cur1">{parseFloat(dashboard?.pools?.total_pool_income
+                                                ? dashboard?.pools?.total_pool_income : 0).toFixed(4)}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -180,7 +183,11 @@ const Dashboard = () => {
                                             Pool Income 1
                                         </div>
                                         <div class="gcp-income">
-                                            <span class="cur1">104.00</span>
+                                            <span class="cur1">
+                                                {parseFloat(dashboard?.pools?.pool_income_1
+                                                    ? dashboard?.pools?.pool_income_1 : 0).toFixed(4)}
+
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -196,7 +203,8 @@ const Dashboard = () => {
                                             Pool Income 2
                                         </div>
                                         <div class="gcp-income">
-                                            <span class="cur1">0.00</span>
+                                            <span class="cur1">  {parseFloat(dashboard?.pools?.pool_income_2
+                                                ? dashboard?.pools?.pool_income_2 : 0).toFixed(4)}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -212,7 +220,8 @@ const Dashboard = () => {
                                             Pool Income 3
                                         </div>
                                         <div class="gcp-income">
-                                            <span class="cur1">0.00</span>
+                                            <span class="cur1">  {parseFloat(dashboard?.pools?.pool_income_3
+                                                ? dashboard?.pools?.pool_income_3 : 0).toFixed(4)}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -228,7 +237,10 @@ const Dashboard = () => {
                                             Bonus DY
                                         </div>
                                         <div class="gcp-income">
-                                            <span class="cur1">0.50</span>
+                                            <span class="cur1">
+                                            
+                                            {parseFloat(dashboard?.bonusDy ? dashboard?.bonusDy : 0).toFixed(4)}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -244,7 +256,10 @@ const Dashboard = () => {
                                             Withdrawal
                                         </div>
                                         <div class="gcp-income">
-                                            <span class="cur1">4415.6100</span>
+                                            <span class="cur1">
+                                            {parseFloat(dashboard?.widthdrawl
+                                                ?dashboard?.widthdrawl : 0).toFixed(4)}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -260,7 +275,10 @@ const Dashboard = () => {
                                             Total Downline Business
                                         </div>
                                         <div class="gcp-income">
-                                            <span class="cur1">38400.00</span>
+                                            <span class="cur1">
+                                            {parseFloat(dashboard?.downlineBusiness
+                                                ?dashboard?.downlineBusiness : 0).toFixed(4)}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
