@@ -1,7 +1,7 @@
 
 const Dashboard = () => {
     return (
-        <div >
+        <div id="member-layout" class="page-container">
             <div className="left-panel left-panel2">
                 <div className="close-panel">
                     <i className="fa fa-times close_button" aria-hidden="true"></i>
@@ -9,7 +9,7 @@ const Dashboard = () => {
                 <div className="wdg-divider"></div>
                 <div className="wdg-logo">
                     <a href="index.html">
-                        <img src="assets/images/logo.png" style={{ width: "100%", marginTop: "60px" }} />
+                        <img src="assets/images/logo.png" style={{ width: "100px", marginTop: "60px" }} />
                     </a>
                 </div>
                 <div className="wdg-divider"></div>
