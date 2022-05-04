@@ -26,49 +26,156 @@ const Dashboard = () => {
     return (
         <div class="content-wrapper">
             <link rel="stylesheet" type="text/css" href="assets/css/NewUserPannel.css" />
-            <section class="maindsb">
-                <div class="container">
-                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="item">
-                                <a href="https://www.wyshopping.life/" target="_blank">
-                                    <img src="assets/images/banner/12.jpg" alt="d-app banner -1" style={{ width: "100%" }} />
-                                </a>
-                            </div>
-
-                            <div class="item active">
-                                <a href="https://www.wyshopping.life/" target="_blank">
-                                    <img src="assets/images/banner/8.jpg" alt="d-app banner -2" style={{ width: "100%" }} />
-                                </a>
-                            </div>
-                            <div class="item">
-                                <a href="https://www.wyshopping.life/" target="_blank">
-                                    <img src="assets/images/banner/9.jpg" alt="d-app banner -3" style={{ width: "100%" }} />
-                                </a>
-                            </div>
-                            <div class="item">
-                                <a href="https://www.wyshopping.life/" target="_blank">
-                                    <img src="assets/images/banner/10.jpg" alt="d-app banner -4" style={{ width: "100%" }} />
-                                </a>
-                            </div>
-                            <div class="item">
-                                <a href="https://www.wyshopping.life/" target="_blank">
-                                    <img src="assets/images/banner/11.jpg" alt="d-app banner -5" style={{ width: "100%" }} />
-                                </a>
-                            </div>
-                        </div>
-
-                        <a class="left carousel-control indicator_set" href="#myCarousel" data-slide="prev">
-                            <span class=" indicator_set glyphicon fa fa-chevron-circle-left"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="right carousel-control indicator_set" href="#myCarousel" data-slide="next">
-                            <span class=" indicator_set glyphicon fa fa-chevron-circle-right"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                </div>
-            </section>
+            <section className="maindsb">
+        <div className="container">
+          <div
+            id="carouselExampleControls"
+            class="carousel slide"
+            data-bs-ride="carousel"
+          >
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <a href="https://www.wyshopping.life/" target="_blank">
+                  <img
+                    src="assets/images/banner/12.jpg"
+                    alt="d-app banner -1"
+                    style={{ width: "100%" }}
+                  />
+                </a>
+              </div>
+              <div class="carousel-item">
+                <a href="https://www.wyshopping.life/" target="_blank">
+                  <img
+                    src="assets/images/banner/8.jpg"
+                    alt="d-app banner -2"
+                    style={{ width: "100%" }}
+                  />
+                </a>
+              </div>
+              <div class="carousel-item">
+                <a href="https://www.wyshopping.life/" target="_blank">
+                  <img
+                    src="assets/images/banner/9.jpg"
+                    alt="d-app banner -3"
+                    style={{ width: "100%" }}
+                  />
+                </a>
+              </div>
+              <div className="carousel-item">
+                <a href="https://www.wyshopping.life/" target="_blank">
+                  <img
+                    src="assets/images/banner/10.jpg"
+                    alt="d-app banner -4"
+                    style={{ width: "100%" }}
+                  />
+                </a>
+              </div>
+              <div className="carousel-item">
+                <a href="https://www.wyshopping.life/" target="_blank">
+                  <img
+                    src="assets/images/banner/11.jpg"
+                    alt="d-app banner -5"
+                    style={{ width: "100%" }}
+                  />
+                </a>
+              </div>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExampleControls"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExampleControls"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+          {/* <div
+            id="myCarousel"
+            className="carousel slide"
+            data-bs-ride="carousel"
+          >
+            <div className="carousel-inner">
+              <div className="item">
+                <a href="https://www.wyshopping.life/" target="_blank">
+                  <img
+                    src="assets/images/banner/12.jpg"
+                    alt="d-app banner -1"
+                    style={{ width: "100%" }}
+                  />
+                </a>
+              </div>
+              <div className="item active">
+                <a href="https://www.wyshopping.life/" target="_blank">
+                  <img
+                    src="assets/images/banner/8.jpg"
+                    alt="d-app banner -2"
+                    style={{ width: "100%" }}
+                  />
+                </a>
+              </div>
+              <div className="item">
+                <a href="https://www.wyshopping.life/" target="_blank">
+                  <img
+                    src="assets/images/banner/9.jpg"
+                    alt="d-app banner -3"
+                    style={{ width: "100%" }}
+                  />
+                </a>
+              </div>
+              <div className="item">
+                <a href="https://www.wyshopping.life/" target="_blank">
+                  <img
+                    src="assets/images/banner/10.jpg"
+                    alt="d-app banner -4"
+                    style={{ width: "100%" }}
+                  />
+                </a>
+              </div>
+              <div className="item">
+                <a href="https://www.wyshopping.life/" target="_blank">
+                  <img
+                    src="assets/images/banner/11.jpg"
+                    alt="d-app banner -5"
+                    style={{ width: "100%" }}
+                  />
+                </a>
+              </div>
+            </div>
+            <a
+              className="left carousel-control indicator_set"
+              href="#myCarousel"
+              data-bs-slide="prev"
+            >
+              <span className=" indicator_set glyphicon fa fa-chevron-circle-left"></span>
+              <span className="sr-only">Previous</span>
+            </a>
+            <a
+              className="right carousel-control indicator_set"
+              href="#myCarousel"
+              data-bs-slide="next"
+            >
+              <span className=" indicator_set glyphicon fa fa-chevron-circle-right"></span>
+              <span className="sr-only">Next</span>
+            </a>
+          </div> */}
+        </div>
+      </section>
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
@@ -285,8 +392,9 @@ const Dashboard = () => {
                             </div>
                         </a>
                     </div>
+                  </div>
                 </div>
-            </div>
+            
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
