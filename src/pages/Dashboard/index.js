@@ -6,18 +6,22 @@ import {
 } from "../../store/actions/dashboard"
 const Dashboard = () => {
     const dashboard = useSelector(state => state?.dashboard)
+    const user = localStorage.getItem('user')
     const dispatch = useDispatch();
     const getAllData = () => {
-        dispatch(getWalletAddress('100'));
-        dispatch(getDailyYeild('100'));
-        dispatch(getTeamDy('100'));
-        dispatch(getAllParticipants('100'));
-        dispatch(getBonusDy('100'));
-        dispatch(getReferralEarning('100'));
-        dispatch(getPools('100'));
-        dispatch(getWithdrawal('100'));
-        dispatch(getDownlineBusiness('100'));
-
+        if (user) {
+            let ress = JSON.parse(user);
+            let uId = ress?.user_id;
+            dispatch(getWalletAddress(uId));
+            dispatch(getAllParticipants(uId));
+            dispatch(getDailyYeild(uId));
+            dispatch(getTeamDy(uId));
+            dispatch(getBonusDy(uId));
+            dispatch(getReferralEarning(uId));
+            dispatch(getPools(uId));
+            dispatch(getWithdrawal(uId));
+            dispatch(getDownlineBusiness(uId));
+        }
     }
     useEffect(() => {
         getAllData()
@@ -27,85 +31,85 @@ const Dashboard = () => {
         <div class="content-wrapper">
             <link rel="stylesheet" type="text/css" href="assets/css/NewUserPannel.css" />
             <section className="maindsb">
-        <div className="container">
-          <div
-            id="carouselExampleControls"
-            class="carousel slide"
-            data-bs-ride="carousel"
-          >
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <a href="https://www.wyshopping.life/" target="_blank">
-                  <img
-                    src="assets/images/banner/12.jpg"
-                    alt="d-app banner -1"
-                    style={{ width: "100%" }}
-                  />
-                </a>
-              </div>
-              <div class="carousel-item">
-                <a href="https://www.wyshopping.life/" target="_blank">
-                  <img
-                    src="assets/images/banner/8.jpg"
-                    alt="d-app banner -2"
-                    style={{ width: "100%" }}
-                  />
-                </a>
-              </div>
-              <div class="carousel-item">
-                <a href="https://www.wyshopping.life/" target="_blank">
-                  <img
-                    src="assets/images/banner/9.jpg"
-                    alt="d-app banner -3"
-                    style={{ width: "100%" }}
-                  />
-                </a>
-              </div>
-              <div className="carousel-item">
-                <a href="https://www.wyshopping.life/" target="_blank">
-                  <img
-                    src="assets/images/banner/10.jpg"
-                    alt="d-app banner -4"
-                    style={{ width: "100%" }}
-                  />
-                </a>
-              </div>
-              <div className="carousel-item">
-                <a href="https://www.wyshopping.life/" target="_blank">
-                  <img
-                    src="assets/images/banner/11.jpg"
-                    alt="d-app banner -5"
-                    style={{ width: "100%" }}
-                  />
-                </a>
-              </div>
-            </div>
-            <button
-              class="carousel-control-prev"
-              type="button"
-              data-bs-target="#carouselExampleControls"
-              data-bs-slide="prev"
-            >
-              <span
-                class="carousel-control-prev-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button
-              class="carousel-control-next"
-              type="button"
-              data-bs-target="#carouselExampleControls"
-              data-bs-slide="next"
-            >
-              <span
-                class="carousel-control-next-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-          </div>
-          {/* <div
+                <div className="container">
+                    <div
+                        id="carouselExampleControls"
+                        class="carousel slide"
+                        data-bs-ride="carousel"
+                    >
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <a href="https://www.wyshopping.life/" target="_blank">
+                                    <img
+                                        src="assets/images/banner/12.jpg"
+                                        alt="d-app banner -1"
+                                        style={{ width: "100%" }}
+                                    />
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="https://www.wyshopping.life/" target="_blank">
+                                    <img
+                                        src="assets/images/banner/8.jpg"
+                                        alt="d-app banner -2"
+                                        style={{ width: "100%" }}
+                                    />
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="https://www.wyshopping.life/" target="_blank">
+                                    <img
+                                        src="assets/images/banner/9.jpg"
+                                        alt="d-app banner -3"
+                                        style={{ width: "100%" }}
+                                    />
+                                </a>
+                            </div>
+                            <div className="carousel-item">
+                                <a href="https://www.wyshopping.life/" target="_blank">
+                                    <img
+                                        src="assets/images/banner/10.jpg"
+                                        alt="d-app banner -4"
+                                        style={{ width: "100%" }}
+                                    />
+                                </a>
+                            </div>
+                            <div className="carousel-item">
+                                <a href="https://www.wyshopping.life/" target="_blank">
+                                    <img
+                                        src="assets/images/banner/11.jpg"
+                                        alt="d-app banner -5"
+                                        style={{ width: "100%" }}
+                                    />
+                                </a>
+                            </div>
+                        </div>
+                        <button
+                            class="carousel-control-prev"
+                            type="button"
+                            data-bs-target="#carouselExampleControls"
+                            data-bs-slide="prev"
+                        >
+                            <span
+                                class="carousel-control-prev-icon"
+                                aria-hidden="true"
+                            ></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button
+                            class="carousel-control-next"
+                            type="button"
+                            data-bs-target="#carouselExampleControls"
+                            data-bs-slide="next"
+                        >
+                            <span
+                                class="carousel-control-next-icon"
+                                aria-hidden="true"
+                            ></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                    {/* <div
             id="myCarousel"
             className="carousel slide"
             data-bs-ride="carousel"
@@ -174,8 +178,8 @@ const Dashboard = () => {
               <span className="sr-only">Next</span>
             </a>
           </div> */}
-        </div>
-      </section>
+                </div>
+            </section>
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
@@ -345,8 +349,8 @@ const Dashboard = () => {
                                         </div>
                                         <div class="gcp-income">
                                             <span class="cur1">
-                                            
-                                            {parseFloat(dashboard?.bonusDy ? dashboard?.bonusDy : 0).toFixed(4)}
+
+                                                {parseFloat(dashboard?.bonusDy ? dashboard?.bonusDy : 0).toFixed(4)}
                                             </span>
                                         </div>
                                     </div>
@@ -364,8 +368,8 @@ const Dashboard = () => {
                                         </div>
                                         <div class="gcp-income">
                                             <span class="cur1">
-                                            {parseFloat(dashboard?.widthdrawl
-                                                ?dashboard?.widthdrawl : 0).toFixed(4)}
+                                                {parseFloat(dashboard?.widthdrawl
+                                                    ? dashboard?.widthdrawl : 0).toFixed(4)}
                                             </span>
                                         </div>
                                     </div>
@@ -383,8 +387,8 @@ const Dashboard = () => {
                                         </div>
                                         <div class="gcp-income">
                                             <span class="cur1">
-                                            {parseFloat(dashboard?.downlineBusiness
-                                                ?dashboard?.downlineBusiness : 0).toFixed(4)}
+                                                {parseFloat(dashboard?.downlineBusiness
+                                                    ? dashboard?.downlineBusiness : 0).toFixed(4)}
                                             </span>
                                         </div>
                                     </div>
@@ -392,9 +396,9 @@ const Dashboard = () => {
                             </div>
                         </a>
                     </div>
-                  </div>
                 </div>
-            
+            </div>
+
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">

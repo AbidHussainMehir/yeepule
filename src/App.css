@@ -1,8 +1,20 @@
-
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.loader {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: none;
+  background-size: 100px;
+  opacity: .7;
+  background-color: #000;
+}
+.alert-danger {
+  color: #ffffff;
+  background-color: #ff1900;
+  border-color: #ffb8b0;
+  padding: 0;
 }
 
 @media (prefers-reduced-motion: no-preference) {

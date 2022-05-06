@@ -1,7 +1,22 @@
-import { useSelector } from "react-redux"
+import { useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { getWalletAddress, getAllParticipants } from "../../store/actions/dashboard"
 export const SideMenu = () => {
     const dashboard = useSelector(state => state?.dashboard)
+    const dispatch = useDispatch();
+    const user = localStorage.getItem('user')
 
+    const getAllData = () => {
+        if (user) {
+            let ress = JSON.parse(user);
+            let uId = ress?.user_id;
+            dispatch(getWalletAddress(uId));
+            dispatch(getAllParticipants(uId));
+        }
+    }
+    useEffect(() => {
+        getAllData();
+    }, [])
     return (
         <div className="left-panel left-panel2">
             <div className="close-panel">
@@ -31,16 +46,16 @@ export const SideMenu = () => {
                 <div className="stats-box">
                     <div className="stats-value">
                         {dashboard?.allParticipants?.all_participants ?
-                        dashboard?.allParticipants?.all_participants : 0}
-                        </div>
+                            dashboard?.allParticipants?.all_participants : 0}
+                    </div>
                     <div className="stats-label">All participants:</div>
                 </div>
 
                 <div className="stats-box">
                     <div className="stats-value">
-                    
-                    {dashboard?.allParticipants?.participants_joined_last_24_hours ?
-                        dashboard?.allParticipants?.participants_joined_last_24_hours : 0}
+
+                        {dashboard?.allParticipants?.participants_joined_last_24_hours ?
+                            dashboard?.allParticipants?.participants_joined_last_24_hours : 0}
                     </div>
                     <div className="stats-label">Joined in 24 hour:</div>
                 </div>
@@ -82,7 +97,7 @@ export const SideMenu = () => {
             <div className="wdg-links">
                 <div className="wdg-label">Wallet  Address:</div>
                 <div className="wdg-box bxset primary">
-               
+
                     <input type="text" onclick={`window.open('https://tronscan.org/#/address/${dashboard?.walletAddress}/transactions','_blank')`} className="wdg-input-box cursorset" id="myInput1" readonly="" value={dashboard?.walletAddress} />
                 </div>
             </div>
