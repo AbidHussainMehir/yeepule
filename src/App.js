@@ -13,7 +13,7 @@ import {
   useHistory,
   useLocation
 } from "react-router-dom";
-import { Home,Login,DailyYeild } from "./pages"
+import { Home,Login,DailyYeild,BonusDY ,ReferralEarning,Pools,TeamDY} from "./pages"
 function App() {
   return (
     <Provider store={store}>
@@ -21,6 +21,11 @@ function App() {
         <Switch>
           <ProtectedRoute exact path="/dashboard" component={Dashboard} />
           <ProtectedRoute exact path="/daily-yeild" component={DailyYeild} />
+          <ProtectedRoute exact path="/bonus-dy" component={BonusDY} />
+          <ProtectedRoute exact path="/referral-earning" component={ReferralEarning} />
+          <ProtectedRoute exact path="/pools" component={Pools} />
+          <ProtectedRoute exact path="/team-dy" component={TeamDY} />
+          
           <PublicRoutes exact path="/login"  component={Login} />
           <Route path="/" component={Home} />
           

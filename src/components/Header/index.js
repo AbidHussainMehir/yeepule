@@ -112,19 +112,19 @@ export const Header = () => {
                     <a >Income &nbsp; <i class="fa fa-sort-desc" aria-hidden="true"></i> </a>
                     <ul class="submenu">
                         <li>
-                            <a href="DailyYeild.html">Daily Yeild</a>
+                            <a href="/daily-yeild">Daily Yeild</a>
                         </li>
                         <li>
-                            <a href="TeamDY.html">Team DY</a>
+                            <a href="/team-dy">Team DY</a>
                         </li>
                         <li>
-                            <a href="BonusDY.html">Bonus DY</a>
+                            <a href="/bonus-dy">Bonus DY</a>
                         </li>
                         <li>
-                            <a href="ReferralEarning.html">Referral Earning</a>
+                            <a href="/referral-earning">Referral Earning</a>
                         </li>
                         <li>
-                            <a href="PoolIncome.html">Pool Income</a>
+                            <a href="/pools">Pool Income</a>
                         </li>
                     </ul>
                 </li>
