@@ -76,7 +76,7 @@ export const Header = () => {
                     <a >History &nbsp; <i class="fa fa-sort-desc" aria-hidden="true"></i> </a>
                     <ul class="submenu">
                         <li>
-                            <a href="ActivateHistory.html">Activate/Upgrade History</a>
+                            <a href="/active-history">Activate/Upgrade History</a>
                         </li>
                         <li>
                             <a href="UpgradeId.html">Upgrade Id</a>
@@ -85,7 +85,7 @@ export const Header = () => {
                             <a href="withdrawal.html">Withdrawal</a>
                         </li>
                         <li>
-                            <a href="WithdrawlHistory.html">Widthrawal History</a>
+                            <a href="/widthdrawl-report">Widthrawal History</a>
                         </li>
                     </ul>
                 </li>
@@ -97,13 +97,13 @@ export const Header = () => {
                             <a href="myTeam.html">My Team</a>
                         </li>
                         <li>
-                            <a href="MyReferral.html">My Referral</a>
+                            <a href="/referral-report">My Referral</a>
                         </li>
                         <li>
                             <a href="LevelDetails.html">Level Details</a>
                         </li>
                         <li>
-                            <a href="MyLegDownline.html">My Leg Downline</a>
+                            <a href="/downline-report">My Leg Downline</a>
                         </li>
                     </ul>
                 </li>

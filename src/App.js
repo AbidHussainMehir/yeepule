@@ -8,21 +8,24 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  Redirect,
-  useHistory,
-  useLocation
 } from "react-router-dom";
-import { Home,Login,DailyYeild,BonusDY ,ReferralEarning,Pools,TeamDY} from "./pages"
+import { Home,Login,DailyYeild,BonusDY ,ReferralEarning,Pools,TeamDY,ReferralReport,
+DownlineReport,ActiveHistory,WidthdrawlReport
+
+} from "./pages"
 function App() {
   return (
     <Provider store={store}>
       <Router>
         <Switch>
+          <ProtectedRoute exact path="/downline-report" component={DownlineReport} />
+          <ProtectedRoute exact path="/active-history" component={ActiveHistory} />
+          <ProtectedRoute exact path="/widthdrawl-report" component={WidthdrawlReport} />
           <ProtectedRoute exact path="/dashboard" component={Dashboard} />
           <ProtectedRoute exact path="/daily-yeild" component={DailyYeild} />
           <ProtectedRoute exact path="/bonus-dy" component={BonusDY} />
           <ProtectedRoute exact path="/referral-earning" component={ReferralEarning} />
+          <ProtectedRoute exact path="/referral-report" component={ReferralReport} />
           <ProtectedRoute exact path="/pools" component={Pools} />
           <ProtectedRoute exact path="/team-dy" component={TeamDY} />
           

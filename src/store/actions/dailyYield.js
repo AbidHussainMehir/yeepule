@@ -1,8 +1,75 @@
 import {
-  SET_DAILY_YEILD_REPORT, SET_BONUS_DY_REPORT,SET_REFERRAL_EARNING_REPORT,
-  SET_POOLS_REPORT,SET_TEAM_DY_REPORT
+  SET_DAILY_YEILD_REPORT,
+  SET_BONUS_DY_REPORT,
+  SET_REFERRAL_EARNING_REPORT,
+  SET_POOLS_REPORT,
+  SET_TEAM_DY_REPORT,
+  SET_WIDTHDRAWL_REPORT,
+  SET_ACTIVE_HISTORY_REPORT,
+  SET_DOWNLINE_REPORT,
+  SET_MY_REFERRAL_REPORT
 } from "../types";
 import { API } from "./API";
+
+
+export const getMyReferralReport = (payload) => async (dispatch) => {
+  try {
+    const res = await API.get(`/my_referral_report?id=${payload}`);
+    if (res?.data?.success) {
+      dispatch({
+        type: SET_MY_REFERRAL_REPORT,
+        payload: res.data.data
+      })
+    }
+  } catch (e) {
+  }
+};
+
+export const getDownlineReport = (payload) => async (dispatch) => {
+  try {
+    const res = await API.get(`/downline_report?id=${payload}`);
+    if (res?.data?.success) {
+      dispatch({
+        type: SET_DOWNLINE_REPORT,
+        payload: res.data.data
+      })
+    }
+  } catch (e) {
+  }
+};
+
+
+export const getActiveHistoryReport = (payload) => async (dispatch) => {
+  try {
+    const res = await API.get(`/active_history_report?id=${payload}`);
+    if (res?.data?.success) {
+      dispatch({
+        type: SET_ACTIVE_HISTORY_REPORT,
+        payload: res.data.data
+      })
+    }
+  } catch (e) {
+  }
+};
+
+export const getWidthdrawlReport = (payload) => async (dispatch) => {
+  try {
+    const res = await API.get(`/withdrawl_report?id=${payload}`);
+    if (res?.data?.success) {
+      dispatch({
+        type: SET_WIDTHDRAWL_REPORT,
+        payload: res.data.data
+      })
+    }
+  } catch (e) {
+  }
+};
+
+
+
+
+
+
 export const getDailyYieldReport = (payload) => async (dispatch) => {
   try {
     const res = await API.get(`/daily_yeild_report?id=${payload}`);
