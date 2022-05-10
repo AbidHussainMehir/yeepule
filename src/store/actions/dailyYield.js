@@ -7,11 +7,37 @@ import {
   SET_WIDTHDRAWL_REPORT,
   SET_ACTIVE_HISTORY_REPORT,
   SET_DOWNLINE_REPORT,
-  SET_MY_REFERRAL_REPORT
+  SET_MY_REFERRAL_REPORT,
+  SET_TEAM_REPORT,
+  SET_LEVEL_REPORT
 } from "../types";
 import { API } from "./API";
 
 
+export const getTeamReport = (payload) => async (dispatch) => {
+  try {
+    const res = await API.get(`/my_team_reports?id=${payload}`);
+    if (res?.data?.success) {
+      dispatch({
+        type: SET_TEAM_REPORT,
+        payload: res.data.data
+      })
+    }
+  } catch (e) {
+  }
+};
+export const getLevelReport = (payload) => async (dispatch) => {
+  try {
+    const res = await API.get(`/level_details?id=${payload}`);
+    if (res?.data?.success) {
+      dispatch({
+        type: SET_LEVEL_REPORT,
+        payload: res.data.data
+      })
+    }
+  } catch (e) {
+  }
+};
 export const getMyReferralReport = (payload) => async (dispatch) => {
   try {
     const res = await API.get(`/my_referral_report?id=${payload}`);

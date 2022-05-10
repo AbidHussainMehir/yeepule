@@ -78,12 +78,12 @@ export const Header = () => {
                         <li>
                             <a href="/active-history">Activate/Upgrade History</a>
                         </li>
-                        <li>
+                        {/* <li>
                             <a href="UpgradeId.html">Upgrade Id</a>
                         </li>
                         <li>
-                            <a href="withdrawal.html">Withdrawal</a>
-                        </li>
+                            <a href="withdrawal.html">Withdrawal</a> 
+                        </li>*/}
                         <li>
                             <a href="/widthdrawl-report">Widthrawal History</a>
                         </li>
@@ -94,13 +94,13 @@ export const Header = () => {
                     <a >My Team &nbsp; <i class="fa fa-sort-desc" aria-hidden="true"></i> </a>
                     <ul class="submenu">
                         <li>
-                            <a href="myTeam.html">My Team</a>
+                            <a href="/my-team">My Team</a>
                         </li>
                         <li>
                             <a href="/referral-report">My Referral</a>
                         </li>
                         <li>
-                            <a href="LevelDetails.html">Level Details</a>
+                            <a href="/level-details">Level Details</a>
                         </li>
                         <li>
                             <a href="/downline-report">My Leg Downline</a>
