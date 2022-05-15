@@ -30,9 +30,9 @@ export const SideMenu = () => {
             </div>
             <div className="wdg-divider"></div>
             <div>
-                <div className="wdg-avatar" onclick="window.open('index.html', '_self' )"></div>
+                <div className="wdg-avatar" ></div>
                 <div className="wdg-user">
-                    <input type="hidden" id="HiddenField1UserAccount" value="TL8p3KVhZj6Gu59zh8bF6WregzGFpJSgL9" autocomplete="off" />
+                    <input type="hidden" id="HiddenField1UserAccount" value="TL8p3KVhZj6Gu59zh8bF6WregzGFpJSgL9"  />
                     <span className="user-label">Member ID:</span>
                     <span className="user-id" id="" style={{ color: "#fbc50b" }}>{dashboard?.userId?dashboard?.userId:0} </span>
                 </div>
@@ -75,11 +75,11 @@ export const SideMenu = () => {
             <div className="wdg-links">
                 <div className="wdg-label">Affiliate Link:</div>
                 <div className="wdg-box bxset primary">
-                    <input type="text" className="wdg-input-box" id="myInput1" readonly="" value="http://d-app.network/registration?referrallink=100" />
+                    <input type="text" className="wdg-input-box" id="myInput1"  value="http://d-app.network/registration?referrallink=100" />
                     <div className="fast-msg-box"></div>
                 </div>
                 <div className="wdg-actions">
-                    <button type="button" onclick="myFunction1()">
+                    <button type="button" >
                         <i className="fa fa-clipboard"></i>
                         <span>Copy</span>
                     </button>
@@ -98,7 +98,7 @@ export const SideMenu = () => {
                 <div className="wdg-label">Wallet  Address:</div>
                 <div className="wdg-box bxset primary">
 
-                    <input type="text" onclick={`window.open('https://tronscan.org/#/address/${dashboard?.walletAddress}/transactions','_blank')`} className="wdg-input-box cursorset" id="myInput1" readonly="" value={dashboard?.walletAddress} />
+                    <input type="text" onClick={()=>`window.open('https://tronscan.org/#/address/${dashboard?.walletAddress}/transactions','_blank')`} className="wdg-input-box cursorset" id="myInput1"  value={dashboard?.walletAddress} />
                 </div>
             </div>
         </div>
