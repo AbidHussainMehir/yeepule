@@ -14,12 +14,13 @@ const initialState = {
   widthdrawl: null,
   referralEearnig: null,
   downlineBusiness: null,
+  userId:0
 };
 
 const dashboardReducer = (state = { ...initialState }, action) => {
   switch (action.type) {
     case SET_WALLET_ADDRESS:
-      return { ...state, walletAddress: action.payload };
+      return { ...state, walletAddress: action.payload.res ,userId:action.payload.user};
     case SET_DAILY_YEILD:
       return { ...state, dailyYeild: action.payload };
     case SET_TEAM_DY:

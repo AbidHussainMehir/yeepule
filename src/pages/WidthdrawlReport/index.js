@@ -42,7 +42,8 @@ export const WidthdrawlReport = () => {
         })
         setDateState([...arr])
     }, [widthdrawlReport])
-    console.log("state", widthdrawlReport)
+    
+
     return (
         <>
             <div class="content-wrapper">

@@ -1,8 +1,11 @@
 import loginbg from "./loginbg.jpg"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { loginAction } from "../../store/actions/login"
+import Web3 from "web3";
+import Model from "./model"
+
 export const Login = () => {
     const [inputValue, setInputValue] = useState('');
     const history = useHistory();
@@ -13,10 +16,50 @@ export const Login = () => {
     const handleLogin = async () => {
         let res = await dispatch(loginAction(inputValue));
         if (res) {
+            setTimeout(() => {
             history.push('/dashboard');
-            window.location.reload()
+                
+            }, 1000);
+            // window.location.reload()
         }
     }
+    const [account, setAccount] = useState(null);
+    const [registered, setRegistered] = useState(false);
+    const [chainId, setChainId] = useState(null);
+    const metamask = async () => {
+      let isConnected = false;
+      try {
+        if (window.ethereum) {
+          window.web3 = new Web3(window.ethereum);
+          await window.ethereum.enable();
+          isConnected = true;
+        } else if (window.web3) {
+          window.web3 = new Web3(window.web3.currentProvider);
+          isConnected = true;
+        } else {
+          isConnected = false;
+        }
+        if (isConnected === true) {
+          const web3 = window.web3;
+          let accounts = await web3.eth.getAccounts();
+          setAccount(accounts[0]);
+          setInputValue(accounts[0])
+         let chain= await web3.eth.getChainId()
+         setChainId(chain)
+         window.ethereum.on("accountsChanged", async function (accounts) {
+            setAccount(accounts[0]);
+            setInputValue(accounts[0])
+            let chain= await web3.eth.getChainId()
+            setChainId(chain)
+          });
+        }
+      } catch (error) {
+        console.log("error message", error?.message);
+      }
+    };
+    useEffect(()=>{
+        metamask()
+    },[])
     return <>
         <div id="reg-layout" className="devsBg"
             style={{
@@ -27,7 +70,7 @@ export const Login = () => {
                 backgroundPosition: "center"
             }}
         >
-            <div class="Toastify"></div>
+        {registered&&  <Model setRegistered={setRegistered}/>}
             <div class="container">
                 <div class="row">
                     <div class="col-md-2"></div>
@@ -41,10 +84,9 @@ export const Login = () => {
                                         <div class="ule_logo">
                                             <img src="assets/images/Icon/metamask.png" />
                                         </div>
-                                        <span id="metamaskConnections" style={{ color: "red" }}>MetaMask is not connected..!..Wait...</span>
-                                        <button class="btn loginbtn" disabled id="vendor" >Authorised Login</button>
-
-
+                                        {account===null&&<span id="metamaskConnections" style={{ color: "red" }}>MetaMask is not connected..!..Wait...</span>}
+                                        {chainId!==null&&chainId!==303&&<span id="metamaskConnections" style={{ color: "red" }}>Please Select Wyxth Network ..!</span>}
+                                        <button class="btn loginbtn" onClick={metamask} id="vendor"  >Authorised Login</button>
                                         <form>
                                             <div class="form-row">
                                                 <input id="loginid" class="input_bg" type="text" maxlength="100"
@@ -60,9 +102,18 @@ export const Login = () => {
 
 
                                             </div>
+                                            <div class="form-row">
+                                                <input type="button"
+                                                    onClick={()=>setRegistered(true)}
+                                                    class="btn loginbtn" value="Registered" id="myBtn25" readonly />
+
+
+                                            </div>
                                         </form>
                                     </div>
 
+
+        
                                 </div>
                             </div>
                             <div class="col-md-6 bdl_non">
@@ -92,7 +143,7 @@ export const Login = () => {
                                             <a class="left-btn-styl loginbtn" href="/" title="Go To Home" id="gotohome">Go To Home</a>
                                             <br />
                                             <br />
-                                            <span id="metamaskConnection" style={{ color: "red" }}>Please Install MetaMask!</span>
+                                            {/* <span id="metamaskConnection" style={{ color: "red" }}>Please Install MetaMask!</span> */}
                                         </center>
                                     </div>
                                 </div>

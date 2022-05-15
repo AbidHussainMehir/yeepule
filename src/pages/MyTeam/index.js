@@ -41,7 +41,7 @@ export const MyTeam = () => {
         })
         setDateState([...arr])
     }, [downlineReport])
-    console.log("state", downlineReport)
+    
     return (
         <>
             <div class="content-wrapper">

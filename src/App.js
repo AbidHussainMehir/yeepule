@@ -10,7 +10,7 @@ import {
   Route,
 } from "react-router-dom";
 import { Home,Login,DailyYeild,BonusDY ,ReferralEarning,Pools,TeamDY,ReferralReport,
-DownlineReport,ActiveHistory,WidthdrawlReport,MyTeam,LevelReport
+DownlineReport,ActiveHistory,WidthdrawlReport,MyTeam,LevelReport,Widthdraw,Activate
 
 } from "./pages"
 function App() {
@@ -18,7 +18,10 @@ function App() {
     <Provider store={store}>
       <Router>
         <Switch>
+          <ProtectedRoute exact path="/activate" component={Activate} />
           <ProtectedRoute exact path="/level-details" component={LevelReport} />
+          <ProtectedRoute exact path="/widthdrawl" component={Widthdraw} />
+          
           <ProtectedRoute exact path="/my-team" component={MyTeam} />
           <ProtectedRoute exact path="/downline-report" component={DownlineReport} />
           <ProtectedRoute exact path="/active-history" component={ActiveHistory} />

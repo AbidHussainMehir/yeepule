@@ -79,11 +79,11 @@ export const Header = () => {
                             <a href="/active-history">Activate/Upgrade History</a>
                         </li>
                         {/* <li>
-                            <a href="UpgradeId.html">Upgrade Id</a>
-                        </li>
+                            <a href="/upgrade-id">Upgrade Id</a>
+                        </li> */}
                         <li>
-                            <a href="withdrawal.html">Withdrawal</a> 
-                        </li>*/}
+                            <a href="/widthdrawl">Withdrawal</a> 
+                        </li>
                         <li>
                             <a href="/widthdrawl-report">Widthrawal History</a>
                         </li>

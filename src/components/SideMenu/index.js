@@ -34,7 +34,7 @@ export const SideMenu = () => {
                 <div className="wdg-user">
                     <input type="hidden" id="HiddenField1UserAccount" value="TL8p3KVhZj6Gu59zh8bF6WregzGFpJSgL9" autocomplete="off" />
                     <span className="user-label">Member ID:</span>
-                    <span className="user-id" id="" style={{ color: "#fbc50b" }}>100 </span>
+                    <span className="user-id" id="" style={{ color: "#fbc50b" }}>{dashboard?.userId?dashboard?.userId:0} </span>
                 </div>
             </div>
             <div className="wdg-divider"></div>

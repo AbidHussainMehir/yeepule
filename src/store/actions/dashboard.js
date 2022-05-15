@@ -16,7 +16,7 @@ export const getWalletAddress = (payload) => async (dispatch) => {
     if (res?.data?.success) {
       dispatch({
         type: SET_WALLET_ADDRESS,
-        payload: res.data.data
+        payload: {res:res.data.data,user:payload}
       })
     }
   } catch (e) {

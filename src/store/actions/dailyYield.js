@@ -9,7 +9,8 @@ import {
   SET_DOWNLINE_REPORT,
   SET_MY_REFERRAL_REPORT,
   SET_TEAM_REPORT,
-  SET_LEVEL_REPORT
+  SET_LEVEL_REPORT,
+  SET_WIDTHDRAWL
 } from "../types";
 import { API } from "./API";
 
@@ -147,7 +148,7 @@ export const getPoolsReport = (payload) => async (dispatch) => {
 };
 export const getTeamDyReport = (payload) => async (dispatch) => {
   try {
-    const res = await API.get(`/team_dy_report?id=${payload}`);
+    const res = await API.get(`/team_dy_report?id='${payload}'`);
     if (res?.data?.success) {
       dispatch({
         type: SET_TEAM_DY_REPORT,
@@ -157,3 +158,18 @@ export const getTeamDyReport = (payload) => async (dispatch) => {
   } catch (e) {
   }
 };
+
+// http://localhost:8080/registraction
+// {
+//   "sid":"100",
+//   "uid":"",
+//   "accountnumber":"TXXfR9sSKRELQcGmyuwq65qY1iz5NEFA7G",
+//   "email":"",
+//   "addresslist":"",
+//   "paymentType":"",
+//   "amount":"",
+//   "traxn":"TXXfR9sSKRELQcGmyuwq65qY1iz5NEFA7G",
+//   "status":"success",
+//   "amount1":"",
+//   "amount2":""
+//  }
