@@ -10,6 +10,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import Web3 from "web3";
+import moment from "moment";
 import { contractAddressToken, abiToken, contractAddress, abi } from "./constants";
 
 export const Activate = () => {
@@ -24,6 +25,10 @@ export const Activate = () => {
     const [amount, setAmount] = useState('')
 
     const [rate, setRate] = useState(0)
+    const [apiDate, setDate] = useState(true)
+    const [pending, setPending] = useState(0)
+    const [confirm, setConfirm] = useState([])
+    console.log(apiDate, pending, confirm)
 
 
     const getLiveRate = async () => {
@@ -35,8 +40,46 @@ export const Activate = () => {
 
         }
     }
+    const getLiveRate1 = async () => {
+        let ress = JSON.parse(user);
+        let uId = ress?.user_id;
+        try {
+            const res = await API.get(`/pending_date?id=${uId}`);
+            setDate(res?.data.data[0].edate)
+            let date1 = moment(res?.data.data[0].edate).add(15, 'minutes').isBefore((moment()))
+            setDate(date1)
+        } catch (e) {
+            console.log("error", e)
+
+        }
+    }
+    const getLiveRate2 = async () => {
+        let ress = JSON.parse(user);
+        let uId = ress?.user_id;
+        try {
+            const res = await API.get(`/pending_activation?id=${uId}`);
+            setPending(res?.data.data[0])
+        } catch (e) {
+            console.log("error", e)
+
+        }
+    }
+    const getLiveRate3 = async () => {
+        let ress = JSON.parse(user);
+        let uId = ress?.user_id;
+        try {
+            const res = await API.get(`/confirm_payment?id=${uId}`);
+            setConfirm(res?.data.data)
+        } catch (e) {
+            console.log("error", e)
+
+        }
+    }
     useEffect(() => {
-        getLiveRate()
+        getLiveRate();
+        getLiveRate1();
+        getLiveRate2();
+        getLiveRate3();
     }, [])
     const metamask = async () => {
         let isConnected = false;
@@ -97,13 +140,16 @@ export const Activate = () => {
             // let package = 1;
 
             let mainadd = account;
-
+            if (parseInt(blnce) < parseInt(parseInt(amount) / rate)) {
+                alert("Wallet balance insufficient!!!");
+                return;
+            }
             if (parseInt(usdamt) < 100) {
                 alert("Enter Minimum package amount 100 USD!!!");
                 return;
             }
 
-            if (parseInt(usdamt % 100) != 0) {
+            if (parseInt(parseInt(usdamt) % 100) != 0) {
                 alert("Enter package amount in multiple of 100 USD!!!");
                 return;
             }
@@ -126,55 +172,46 @@ export const Activate = () => {
                 alert("Please Enter correct package amount!!!");
                 return;
             }
-            // if (parseInt(token) > parseInt(Token_Balance)) {
-            //     alert("Wallet balance insufficient!!!");
-            //     return;
-            // }
-            let value = blnce;
 
-            let tokenAmount = value * (10 ** 18);
-            console.log("tokenAmount", tokenAmount)
+            let value = blnce;
             const web3 = window.web3;
+
+            let tokenAmount = web3.utils.toWei(value.toString());
+            console.log("tokenAmount", tokenAmount)
             let contract = new web3.eth.Contract(abi, contractAddress);
             let tokencontract = new web3.eth.Contract(abiToken, contractAddressToken);
-            // await tokencontract.methods.approve(contractAddress, value).send({ from: account });
-            try {
-                const res = await API.post(`/activation`, {
-                    uid: uid,
-                    transaction: 'transaction',
-                    amount: value,
-                    
-                    addreslist: account,
-                    addresslist: account,
-                    amountlist: value,
-                    tokenamount: amount / rate,
-                });
-            } catch (e) {
-                console.log("error", e)
+            await tokencontract.methods.approve(contractAddress, tokenAmount.toString()).send({ from: account });
 
-            }
 
-            contract.methods.sell(value).send({
+            contract.methods.sell(tokenAmount.toString()).send({
                 from: account
             }).on("transactionHash", async (hash) => {
                 if (hash != "") {
                     try {
                         const res = await API.post(`/activation`, {
                             uid: uid,
-                            transaction: 'transaction',
+                            transaction: hash,
                             amount: value,
-                            
                             addreslist: account,
-                            addresslist: account,
+                            useraddress: account,
                             amountlist: value,
                             tokenamount: amount / rate,
                         });
+                        console.log(res)
+                        if (res?.data?.success) {
+                            toast.success('Successfully subscribed to Activation ! ')
+                        } else {
+                            toast.error('Something went wrong ! ')
+
+                        }
+
+                        setTimeout(() => {
+                            getLiveRate1();
+                        }, 250);
                     } catch (e) {
                         console.log("error", e)
-
+                        toast.error('Something went wrong ! ')
                     }
-
-                    //    -- Activate(uid, hash, usdamt, package, address, token);
                 }
 
             });
@@ -186,48 +223,48 @@ export const Activate = () => {
     return (
         <>
 
-            <div class="content-wrapper">
-                <div class="container body-content">
-                    <div class="row">
-            <ToastContainer />
+            <div className="content-wrapper">
+                <div className="container body-content">
+                    <div className="row">
+                        <ToastContainer />
 
-                        <div class="col-md-3"></div>
-                        <div class="col-md-6">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
+                        <div className="col-md-3"></div>
+                        <div className="col-md-6">
+                            <div className="modal-dialog" role="document">
+                                <div className="modal-content">
 
-                                    <div class="ule_logo">
+                                    <div className="ule_logo">
                                         <img src="assets/images/logo.png" />
                                     </div>
                                     <div className="row">
                                         <div className="col-12">
-                                            <h3 class="text-center">Activation</h3>
+                                            <h3 className="text-center">Activation</h3>
 
                                         </div>
                                     </div>
-                                    <div class="modal-header" style={{ paddingBottom: "10px !important", margin: '10px' }}>
+                                    <div className="modal-header" style={{ paddingBottom: "10px !important", margin: '10px' }}>
 
                                         <br></br>
-                                        <div class="avlbal row" style={{ padding: '20px' }}>
-                                            <h5 class="modal-title col-12 pb-4" id="exampleModal3Label2">
+                                        <div className="avlbal row" style={{ padding: '20px' }}>
+                                            <h5 className="modal-title col-12 pb-4" id="exampleModal3Label2">
                                                 Available ULE Token Balance
                                                 <span id="tokenbalance" style={{ paddingTop: '7px', paddingBottom: '7px' }}>{blnce} Token</span>
                                             </h5>
                                             <br />
 
-                                            <h5 class="modal-title">
+                                            <h5 className="modal-title">
                                                 Live Rate
-                                                <input type="text" class="input_width" id="txtchangevalue" style={{ color: "black" }} placeholder={`1 ULE /  ${rate} USD`} readonly="" />
+                                                <input type="text" className="input_width" id="txtchangevalue" style={{ color: "black" }} placeholder={`1 ULE /  ${rate} USD`} readonly="" />
                                             </h5>
                                         </div>
                                     </div>
-                                    <div class="modal-body">
-                                        <div class="popup_net">
-                                            <div class="set_meta">
-                                                <span class="metamaskConnection"> </span>
+                                    <div className="modal-body">
+                                        <div className="popup_net">
+                                            <div className="set_meta">
+                                                <span className="metamaskConnection"> </span>
                                             </div>
-                                            <div class="addNum">
-                                                <div class="trxnumber">
+                                            <div className="addNum">
+                                                <div className="trxnumber">
                                                     <div className='row'>
                                                         <div className='col-8 p-3'>
                                                             <div className='row'>
@@ -250,16 +287,25 @@ export const Activate = () => {
                                                             </div>
                                                         </div>
                                                         <div className='col-4 p-3' style={{ display: 'flex', alignItems: 'flex-end' }}>
+                                                            {confirm.length === 0 && apiDate &&
+                                                                <button style={{ minHeight: '32px' }} onClick={handleActivation}>
+                                                                    <img src="assets/images/activateBlack.png" className="whImg" />
+                                                                    <img src="assets/images/activateYello.png" className="yellowImg" />
+                                                                    Activate
+                                                                </button>
+                                                            }
+                                                            {confirm.length > 0 && <button style={{ minHeight: '32px' }}
+                                                            // onClick={handleActivation}
+                                                            >
+                                                                <img src="assets/images/activateBlack.png" className="whImg" />
+                                                                <img src="assets/images/activateYello.png" className="yellowImg" />
+                                                                Update
+                                                            </button>}
 
-                                                            <button style={{ minHeight: '32px' }} onClick={handleActivation}>
-                                                                <img src="assets/images/activateBlack.png" class="whImg" />
-                                                                <img src="assets/images/activateYello.png" class="yellowImg" />
-                                                                Activate
-                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="yeep_note">
+                                                <div className="yeep_note">
                                                     <h2>Note:</h2>
                                                     <ul>
                                                         <li>Please ensure to connect Metamask wallet.</li>
@@ -269,7 +315,7 @@ export const Activate = () => {
                                                     </ul>
                                                 </div>
 
-                                                <div class="yeep_footer">
+                                                <div className="yeep_footer">
                                                     <p>
                                                         © 2022 | yeepule.network
                                                     </p>
@@ -285,7 +331,7 @@ export const Activate = () => {
             </div>
             {/* <div class="clearfix"><br /></div> */}
             <link rel="stylesheet" type="text/css" href="assets/css/trading.css" />
-          {/*  <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+            {/*  <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
             <link rel="stylesheet" type="text/css" href="assets/css/2.d34346ea.chunk.css" />
             <link rel="stylesheet" type="text/css" href="assets/css/main.f70df022.chunk.css" />
             <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&amp;family=Fira+Sans:wght@300;400&amp;family=Mukta+Vaani:wght@200;300;600&amp;display=swap" rel="stylesheet" />
@@ -298,7 +344,7 @@ export const Activate = () => {
             <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" /> */}
 
             <br /><br />
-            <div class="footer-section">Copyright © 2022 Yeepule. All Rights Reserved.</div>
+            <div className="footer-section">Copyright © 2022 Yeepule. All Rights Reserved.</div>
 
         </>
     );

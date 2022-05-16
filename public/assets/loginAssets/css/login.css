@@ -305,6 +305,8 @@ h2 {
 }
 .reg-box{
     position:relative;
+    height: 470px !important;
+    overflow: hidden;
 }
 @media(min-width:768px) {
     .bdr_non {
