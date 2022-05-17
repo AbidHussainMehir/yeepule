@@ -232,11 +232,12 @@ export const Widthdraw = () => {
       let signature = signingKey.signDigest(messageDigest);
       // let addresscontract="TW6zd5dJfKaw3GKGLB2Kb8ss3PnWDnfx4r"
       // let winnerLength = await window.troni.signatureAddress().call();
-
-      let contract = await window?.tronWeb?.contract().at(CONTRACT_ADDRESS);
+	  let value1 = (depositeAmount * 10 ** 18).toString();
+	  let actualValue = window.tronWeb.toBigNumber(value1); 
+	       let contract = await window?.tronWeb?.contract().at(CONTRACT_ADDRESS);
       contract
         .userTokenWithdraw(
-          depositeAmount.toString(10),
+			actualValue.toString(10),
           parseInt(nonce),
           [messageDigest, signature.r, signature.s],
           signature.v
