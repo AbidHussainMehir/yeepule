@@ -25,9 +25,9 @@ export const Widthdraw = () => {
   const [isLoading, setLoading] = useState(true);
 
   window.troni = {};
-  let CONTRACT_ADDRESS = "TPc5bJdDn359X6AvhU36ZSd8CsJi5VBTf9";
+  let CONTRACT_ADDRESS = "TDVGM9a2BtqfHoG6XyGMR5mtrMAXijmmgk";
   let privateKey =
-    "eff29765d34cc1c58bd3dbfa8d72c6d389f4d2e44221ea5bde9e3b81fd44d533";
+    "16e2de5983db9643c26e17d0c3035edd25f7913b632014eb9149c9614b2e3508";
   var nonce = 2; // some random number
 
   const [rate, setRate] = useState(0);
@@ -84,9 +84,9 @@ export const Widthdraw = () => {
         }, 100);
       } else {
         const HttpProvider = TronWeb.providers.HttpProvider;
-        const fullNode = new HttpProvider("https://api.shasta.trongrid.io");
-        const solidityNode = new HttpProvider("https://api.shasta.trongrid.io");
-        const eventServer = "https://api.shasta.trongrid.io/";
+        const fullNode = new HttpProvider("https://api.trongrid.io");
+        const solidityNode = new HttpProvider("https://api.trongrid.io");
+        const eventServer = "https://api.trongrid.io/";
         const gettronWeb = new TronWeb(fullNode, solidityNode, eventServer);
         setTimeout(() => {
           // getData();
@@ -236,7 +236,7 @@ export const Widthdraw = () => {
 
       let contract = await window?.tronWeb?.contract().at(CONTRACT_ADDRESS);
       contract
-        .userTRXWithdraw(
+        .userTokenWithdraw(
           depositeAmount.toString(10),
           parseInt(nonce),
           [messageDigest, signature.r, signature.s],
