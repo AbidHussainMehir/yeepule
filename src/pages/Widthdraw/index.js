@@ -177,7 +177,6 @@ export const Widthdraw = () => {
   const DrawTicket = async () => {
     let maxWithdraw = await getMaxWithdraw();
     let lastTransaction = await getLastTransaction();
-    console.log(maxWithdraw, lastTransaction);
 
     if (depositeAmount < 10) {
       alert("Withdraw Request can be made on Minimum 10 USD !");
