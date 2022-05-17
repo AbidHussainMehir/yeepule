@@ -308,7 +308,9 @@
         width: 23.2rem;
         height: 4.7rem;
     }
-
+    .left-panel{
+display: none !important;
+    }
     #public-layout .movie-thumb {
         max-height: 61.5vw;
     }

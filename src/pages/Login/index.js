@@ -6,6 +6,9 @@ import { loginAction } from "../../store/actions/login";
 import Web3 from "web3";
 import Model from "./model";
 import moment from "moment";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 export const Login = () => {
   const [inputValue, setInputValue] = useState("");
   const history = useHistory();
@@ -20,8 +23,22 @@ export const Login = () => {
         history.push("/dashboard");
       }, 1000);
       // window.location.reload()
+    } else {
+      toast.error("Something went wrong ! ");
     }
   };
+  const handleLogin2 = async (ids) => {
+    let res = await dispatch(loginAction(ids));
+    if (res) {
+      setTimeout(() => {
+        history.push("/dashboard");
+      }, 1000);
+      // window.location.reload()
+    } else {
+      toast.error("Something went wrong ! ");
+    }
+  };
+
   const [account, setAccount] = useState(null);
   const [registered, setRegistered] = useState(false);
   const [chainId, setChainId] = useState(null);
@@ -43,13 +60,20 @@ export const Login = () => {
         let accounts = await web3.eth.getAccounts();
         setAccount(accounts[0]);
         setInputValue(accounts[0]);
+
         let chain = await web3.eth.getChainId();
         setChainId(chain);
+        if (chain === 303) {
+          handleLogin2(accounts[0]);
+        }
         window.ethereum.on("accountsChanged", async function (accounts) {
           setAccount(accounts[0]);
           setInputValue(accounts[0]);
           let chain = await web3.eth.getChainId();
           setChainId(chain);
+          if (chain === 303) {
+            handleLogin2(accounts[0]);
+          }
         });
       }
     } catch (error) {
@@ -72,6 +96,8 @@ export const Login = () => {
           backgroundPosition: "center",
         }}
       >
+        <ToastContainer />
+
         {registered && <Model setRegistered={setRegistered} />}
         <div class="container">
           <div class="row">
