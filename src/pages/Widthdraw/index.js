@@ -232,7 +232,7 @@ export const Widthdraw = () => {
       let signature = signingKey.signDigest(messageDigest);
       // let addresscontract="TW6zd5dJfKaw3GKGLB2Kb8ss3PnWDnfx4r"
       // let winnerLength = await window.troni.signatureAddress().call();
-	  let value1 = (depositeAmount * 10 ** 18).toString();
+	  let value1 = (((depositeAmount / rate) * 0.95) * 10 ** 18).toString();
 	  let actualValue = window.tronWeb.toBigNumber(value1); 
 	       let contract = await window?.tronWeb?.contract().at(CONTRACT_ADDRESS);
       contract
