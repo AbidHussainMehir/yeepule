@@ -9,6 +9,7 @@ import moment from "moment";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+var interv = null;
 export const Login = () => {
   const [inputValue, setInputValue] = useState("");
   const history = useHistory();
@@ -20,6 +21,8 @@ export const Login = () => {
     let res = await dispatch(loginAction(inputValue));
     if (res) {
       setTimeout(() => {
+        setAccount("");
+
         history.push("/dashboard");
       }, 1000);
       // window.location.reload()
@@ -31,6 +34,7 @@ export const Login = () => {
     let res = await dispatch(loginAction(ids));
     if (res) {
       setTimeout(() => {
+        setAccount("");
         history.push("/dashboard");
       }, 1000);
       // window.location.reload()
@@ -58,21 +62,28 @@ export const Login = () => {
       if (isConnected === true) {
         const web3 = window.web3;
         let accounts = await web3.eth.getAccounts();
-        setAccount(accounts[0]);
-        setInputValue(accounts[0]);
-
+        if (account !== accounts[0]) {
+          setAccount(accounts[0]);
+        }
+        if (inputValue !== accounts[0]) {
+          setInputValue(accounts[0]);
+        }
         let chain = await web3.eth.getChainId();
         setChainId(chain);
         if (chain === 303) {
-          handleLogin2(accounts[0]);
+          // handleLogin2(accounts[0]);
         }
         window.ethereum.on("accountsChanged", async function (accounts) {
-          setAccount(accounts[0]);
-          setInputValue(accounts[0]);
+          if (account !== accounts[0]) {
+            setAccount(accounts[0]);
+          }
+          if (inputValue !== accounts[0]) {
+            setInputValue(accounts[0]);
+          }
           let chain = await web3.eth.getChainId();
           setChainId(chain);
           if (chain === 303) {
-            handleLogin2(accounts[0]);
+            // handleLogin2(accounts[0]);
           }
         });
       }
@@ -80,8 +91,20 @@ export const Login = () => {
       console.log("error message", error?.message);
     }
   };
+  // useEffect(() => {
+  //   metamask();
+  //   interv = setInterval(() => {
+  //     metamask();
+  //   }, 1500);
+  // }, []);
   useEffect(() => {
-    metamask();
+    return () => {
+      setInputValue("");
+      setAccount("");
+      if (interv) {
+        clearInterval(interv);
+      }
+    };
   }, []);
   return (
     <>
@@ -113,7 +136,7 @@ export const Login = () => {
                         </h2>
                       </div>
                       <div class="subtitle">
-                        Automatic login if you have MetaMask wallet:
+                        Connect wallet or Enter Id to Login
                       </div>
                       <div class="ule_logo">
                         <img src="assets/images/Icon/metamask.png" />
@@ -133,7 +156,7 @@ export const Login = () => {
                         onClick={metamask}
                         id="vendor"
                       >
-                        Authorised Login
+                        Connect Wallet
                       </button>
                       <form>
                         <div class="form-row">
@@ -158,16 +181,18 @@ export const Login = () => {
                             readonly
                           />
                         </div>
-                        <div class="form-row">
-                          <input
-                            type="button"
-                            onClick={() => setRegistered(true)}
-                            class="btn loginbtn"
-                            value="Registered"
-                            id="myBtn25"
-                            readonly
-                          />
-                        </div>
+                        {
+                          <div class="form-row">
+                            <input
+                              type="button"
+                              onClick={() => setRegistered(true)}
+                              class="btn loginbtn"
+                              value="Registered"
+                              id="myBtn25"
+                              readonly
+                            />
+                          </div>
+                        }
                       </form>
                     </div>
                   </div>

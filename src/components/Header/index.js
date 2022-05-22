@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-export const Header = () => {
+import "./index.css";
+export const Header = ({ hiddenSideMenu, setHidden }) => {
   const [showMenu, setShowMenu] = useState(false);
   const history = useHistory();
   const handleLogout = () => {
@@ -11,8 +12,14 @@ export const Header = () => {
   };
   return (
     <div class="top-bar-wrapper" data-menu="collapse">
-      <div class="">
-        <i class="fa fa-sliders" aria-hidden="true"></i>
+      <div>
+        <div class="left-menu-icon" onClick={() => setHidden(!hiddenSideMenu)}>
+          <i
+            class="fa fa-sliders"
+            aria-hidden="true"
+            style={{ color: "#f1c40f" }}
+          ></i>
+        </div>
       </div>
       <ul
         id="main-menu"
@@ -90,6 +97,9 @@ export const Header = () => {
               <a href="/widthdrawl">Withdrawal</a>
             </li>
             <li>
+              <a href="/wallet">Withdrawal Address </a>
+            </li>
+            <li>
               <a href="/widthdrawl-report">Widthrawal History</a>
             </li>
           </ul>
@@ -142,10 +152,7 @@ export const Header = () => {
           <a onClick={handleLogout}>Logout</a>
         </li>
       </ul>
-      <ul
-        id="main-menu"
-        class="menu-nav mob-navset"
-      >
+      <ul id="main-menu" class="menu-nav mob-navset">
         <li class="tviconset">
           <a href="https://www.wyshopping.life/" target="_blank">
             <span>
@@ -215,6 +222,9 @@ export const Header = () => {
             </li>
             <li>
               <a href="/widthdrawl">Withdrawal</a>
+            </li>
+            <li>
+              <a href="/wallet">Withdrawal Address </a>
             </li>
             <li>
               <a href="/widthdrawl-report">Widthrawal History</a>

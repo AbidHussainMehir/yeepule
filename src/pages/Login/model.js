@@ -12,8 +12,12 @@ import "./index.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-
+import { loginAction } from "../../store/actions/login";
+import {useDispatch} from "react-redux";
+import {useHistory} from "react-router-dom"
 export default function FormDialog({ setRegistered }) {
+  const history=useHistory();
+  const dispatch=useDispatch()
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -73,13 +77,24 @@ export default function FormDialog({ setRegistered }) {
         amount2: "",
       });
       console.log(res);
+      handleLogin2(account);
       toast.success("Successfully registered !");
     } catch (e) {
       console.log("error", e);
       toast.error("Something went wrong !");
     }
   };
-
+  const handleLogin2 = async (ids) => {
+    let res = await dispatch(loginAction(ids));
+    if (res) {
+      setTimeout(() => {
+        history.push("/dashboard");
+      }, 1000);
+      // window.location.reload()
+    } else {
+      toast.error("Something went wrong ! ");
+    }
+  };
   useEffect(() => {
     metamask();
   }, []);

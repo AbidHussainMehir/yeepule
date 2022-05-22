@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   getWalletAddress,
   getDailyYeild,
@@ -11,6 +11,7 @@ import {
   getWithdrawal,
   getDownlineBusiness,
 } from "../../store/actions/dashboard";
+import { API } from "../../store/actions/API";
 const Dashboard = () => {
   const dashboard = useSelector((state) => state?.dashboard);
   const user = localStorage.getItem("user");
@@ -31,9 +32,24 @@ const Dashboard = () => {
     }
   };
   useEffect(() => {
+    getBetaWallet();
     getAllData();
   }, []);
-  console.log("state", dashboard);
+
+  const [betaWallet, setBetaWallet] = useState(null);
+
+  const getBetaWallet = async () => {
+    let ress = JSON.parse(user);
+    let uId = ress?.user_id;
+    try {
+      const res = await API.get(`/get_betawallet?id=${uId}`);
+      setBetaWallet(res?.data.data[0]);
+    } catch (e) {
+      console.log("error", e);
+    }
+  };
+
+  console.log("state", betaWallet);
   return (
     <div class="content-wrapper">
       <link
@@ -256,7 +272,11 @@ const Dashboard = () => {
                   <div class="gcp-description">
                     <div class="gcp-title">My Team</div>
                     <div class="gcp-income">
-                      <span class="cur1">Active 0 /In-Active 1</span>
+                      <span class="cur1">
+                        {betaWallet?.totaldownline
+                          ? betaWallet?.totaldownline
+                          : 0}
+                      </span>
                       <input type="hidden" id="jj" autocomplete="off" />
                       <input type="hidden" id="u" autocomplete="off" />
                     </div>
@@ -272,7 +292,9 @@ const Dashboard = () => {
                   <div class="gcp-description">
                     <div class="gcp-title">My Referral</div>
                     <div class="gcp-income">
-                      <span class="cur1">Active 0 /In-Active 1</span>
+                      <span class="cur1">
+                        {betaWallet?.totaldirect ? betaWallet?.totaldirect : 0}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -434,7 +456,7 @@ const Dashboard = () => {
             </div>
             <div class="exbox ">
               <a
-                href="https://sunswap.com/#/scanold/detail/TEQuSBH1jxGzqJfZSQx8tusHrLaKobnRZz"
+                href="https://sunswap.com/#/scan/detail/TMK6twckh5mq38zUiSM6CLSBGzXdqzdHNc"
                 target="_blank"
               >
                 <div class="rate juslogoset">
@@ -443,28 +465,34 @@ const Dashboard = () => {
                   </span>
                 </div>
               </a>
-              <a href="https://wyzthswap.org/home" target="_blank">
+              <a href="https://raydium.io/swap/" target="_blank">
                 <div class="rate juslogoset mrlrset">
                   <span>
                     <img src="assets/images/Icon/raydiumswap.png" />{" "}
                   </span>
                 </div>
               </a>
-              <a href="https://justlend.org/#/home" target="_blank">
+              <a href="https://wyzthswap.org/pair-detail" target="_blank">
                 <div class="rate juslogoset">
                   <span>
                     <img src="assets/images/Icon/wyzswap.png" />{" "}
                   </span>
                 </div>
               </a>
-              <a href="https://justlend.org/#/home" target="_blank">
+              <a
+                href="https://info.quickswap.exchange/#/pair/0xc2d2647786c22200c73f1dbee5798aad86f54c44"
+                target="_blank"
+              >
                 <div class="rate juslogoset">
                   <span>
                     <img src="assets/images/Icon/quickswapWithName.png" />{" "}
                   </span>
                 </div>
               </a>
-              <a href="https://justlend.org/#/home" target="_blank">
+              <a
+                href="https://pancakeswap.finance/info/pool/0x718cec478b7cebfe7dc4986d295065e3cb60e635"
+                target="_blank"
+              >
                 <div class="rate juslogoset">
                   <span>
                     <img src="assets/images/Icon/pancakeswapName.png" />{" "}
@@ -478,18 +506,53 @@ const Dashboard = () => {
         <br />
         <div class="row">
           <div class="col-md-12">
+            <div class="wyz_bridge">
+              <p>
+                Get Multi-Chain ULE From Using{" "}
+                <a href="https://bridge.wyzthswap.org/" target="_blank">
+                  <img src="assets/images/bridge-logo.svg" />
+                </a>{" "}
+                & Enjoy Price Hedging !!
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
             <div class="prgs">
-              <div id="myProgress">
+              <div
+                class="progress mt-4"
+                style={{ height: "3.5rem", background: "#fff" }}
+              >
                 <div
-                  id="myBar"
-                  style={{ width: "100%", backgroundColor: "red" }}
-                ></div>
+                  class="progress-bar"
+                  role="progressbar"
+                  style={{
+                    width: `${
+                      betaWallet?.MaxIncome ? betaWallet?.MaxIncome : 0
+                    }%`,
+                    fontWeight: "bold",
+                    color: "#f1c004",
+
+                    background: "#656262",
+                  }}
+                  aria-valuenow={
+                    betaWallet?.MaxIncome ? betaWallet?.MaxIncome : 0
+                  }
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                >
+                  {`${betaWallet?.MaxIncome ? betaWallet?.MaxIncome : 0} %`}
+                </div>
               </div>
             </div>
-            <div style={{ color: "#000", fontWeight: "400" }}>
+            <div className="mb-5" style={{ color: "#000", fontWeight: "400" }}>
               {" "}
-              Your total earning is 300.0000 USD out of 300.0000 USD (Your
-              earned 100.0000% out of 300% of your investment )
+              Your total earning is{" "}
+              {betaWallet?.EarnAmount ? betaWallet?.EarnAmount : 0} USD out of{" "}
+              {betaWallet?.tt ? betaWallet?.tt : 0} USD (Your earned{" "}
+              {betaWallet?.MaxIncome ? betaWallet?.MaxIncome : 0}% out of 300%
+              of your investment )
             </div>
             {/* 
                     <style>

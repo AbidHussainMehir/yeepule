@@ -33,7 +33,7 @@ export const DailyYeild = () => {
                 {
                     sNo: index + 1,
                     from_id: item?.id,
-                    amount: item?.amount,
+                    amount: item?.plan_amount,
                     date: moment(item?.date).format('M/D/YYYY h:m:s A')
                 }
 

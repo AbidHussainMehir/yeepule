@@ -2995,7 +2995,7 @@ figure.woocommerce-product-gallery__wrapper {
 #footer-info {
     text-align: left;
     color: #fff;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
     float: left
 }
 
@@ -27834,7 +27834,7 @@ screen and (max-width:800px) and (orientation:landscape) {
     margin: 0 5px;
 }
 .footer_Logo{
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     text-align: center;
     align-items: center;

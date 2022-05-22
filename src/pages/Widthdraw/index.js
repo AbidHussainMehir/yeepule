@@ -23,11 +23,11 @@ export const Widthdraw = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [tronAdd, setTronAdd] = useState("");
   const [isLoading, setLoading] = useState(true);
+  const [isLoadingTrans, setLoadingTrans] = useState(false);
 
   window.troni = {};
-  let CONTRACT_ADDRESS = "TDVGM9a2BtqfHoG6XyGMR5mtrMAXijmmgk";
-  let privateKey =
-    "16e2de5983db9643c26e17d0c3035edd25f7913b632014eb9149c9614b2e3508";
+  let CONTRACT_ADDRESS = "TJky76sBRMvV8ybkL7mb1XionbM8PdGtcw";
+  let privateKey = "privateKey";
   var nonce = 2; // some random number
 
   const [rate, setRate] = useState(0);
@@ -71,7 +71,7 @@ export const Widthdraw = () => {
   console.log(trxtBalance);
   async function Ethereum() {
     try {
-      console.log("initial");
+      //TDVGM9a2BtqfHoG6XyGMR5mtrMAXijmmgk console.log("initial");
       mainAccount = await window?.tronWeb?.defaultAddress?.base58;
       console.log("main Account", mainAccount);
 
@@ -175,19 +175,30 @@ export const Widthdraw = () => {
   };
 
   const DrawTicket = async () => {
+    setLoadingTrans(true);
     let maxWithdraw = await getMaxWithdraw();
     let lastTransaction = await getLastTransaction();
 
+    if (depositeAmount > trxtBalance) {
+      alert("Insufficiant Wallet Balance !");
+      setLoadingTrans(false);
+      return;
+    }
     if (depositeAmount < 10) {
       alert("Withdraw Request can be made on Minimum 10 USD !");
+      setLoadingTrans(false);
       return;
     }
     if (depositeAmount > 500) {
       alert("Withdraw Request can be made on Maximum 500 USD !");
+      setLoadingTrans(false);
+
       return;
     }
     if (accountAddress === "") {
       alert("TronLink is not connected !");
+      setLoadingTrans(false);
+
       return;
     }
 
@@ -197,6 +208,8 @@ export const Widthdraw = () => {
       accountAddress !== userInfo?.TronAddress
     ) {
       alert("Wrong Tron address is Selected !");
+      setLoadingTrans(false);
+
       return;
     }
 
@@ -206,14 +219,20 @@ export const Widthdraw = () => {
       accountAddress !== userInfo?.TronAddress
     ) {
       alert("Wrong TronLink Account is connected !");
+      setLoadingTrans(false);
+
       return;
     }
     if (lastTransaction.length > 0) {
       alert("Your next exchange will be after 60 minutes..");
+      setLoadingTrans(false);
+
       return;
     }
-    if (depositeAmount + maxWithdraw > 500) {
+    if (parseInt(depositeAmount) + parseInt(maxWithdraw) > 500) {
       alert("Withdrawal request will be made on Maximum 500 USD in one Day !");
+      setLoadingTrans(false);
+
       return;
     }
 
@@ -232,19 +251,19 @@ export const Widthdraw = () => {
       let signature = signingKey.signDigest(messageDigest);
       // let addresscontract="TW6zd5dJfKaw3GKGLB2Kb8ss3PnWDnfx4r"
       // let winnerLength = await window.troni.signatureAddress().call();
-	  let value1 = (((depositeAmount / rate) * 0.95) * 10 ** 18).toString();
-	  let actualValue = window.tronWeb.toBigNumber(value1); 
-	       let contract = await window?.tronWeb?.contract().at(CONTRACT_ADDRESS);
+      let value1 = ((depositeAmount / rate) * 0.95 * 10 ** 18).toString();
+      let actualValue = window.tronWeb.toBigNumber(value1);
+      let contract = await window?.tronWeb?.contract().at(CONTRACT_ADDRESS);
       contract
         .userTokenWithdraw(
-			actualValue.toString(10),
+          actualValue.toString(10),
           parseInt(nonce),
           [messageDigest, signature.r, signature.s],
           signature.v
         )
         .send()
         .then(async (output) => {
-          console.log("- Output:", output, "\n");
+          //console.log("- Output:", output, "\n");
           let ress = JSON.parse(user);
           let uId = ress?.user_id;
           try {
@@ -257,22 +276,28 @@ export const Widthdraw = () => {
                 ? (depositeAmount / rate) * 0.95
                 : depositeAmount,
             });
+            setLoadingTrans(false);
+
             toast.success("Transaction is complete");
           } catch (e) {
             console.log("error", e);
+            setLoadingTrans(false);
 
             toast.error("Something went Wrong !");
           }
         })
         .catch((e) => {
           toast.error(e.message);
+          setLoadingTrans(false);
         });
       // console.log(getDate, numberOfTokens);
     } else {
+      setLoadingTrans(false);
+
       toast.error("TronLink is not connected");
     }
   };
-  console.log("userInfo", userInfo);
+  //console.log("userInfo", userInfo);
   return (
     <>
       {isLoading ? (
@@ -359,7 +384,38 @@ export const Widthdraw = () => {
                       <br />
                       <br />
                       <br />
-
+                      <div className="row">
+                        <div className="col-md-2">
+                          <label>Metamask Address</label>
+                        </div>
+                        <div className="col-md-3">
+                          <input
+                            type="text"
+                            id="EthAddress"
+                            name="EthAddress"
+                            className="form-control mb-20"
+                            value={userInfo?.EthAddress}
+                            disabled={true}
+                            placeholder="Enter ETH Address"
+                          />
+                        </div>
+                      </div>
+                      <div className="row mt-3 mb-3">
+                        <div className="col-md-2">
+                          <label>TRON Address</label>
+                        </div>
+                        <div className="col-md-3">
+                          <input
+                            type="text"
+                            id="TronAddress"
+                            name="TronAddress"
+                            value={userInfo?.TronAddress}
+                            disabled={true}
+                            className="form-control mb-20"
+                            placeholder="Enter TRON Address"
+                          />
+                        </div>
+                      </div>
                       <div className="row">
                         <div className="col-md-2">
                           <label>Wallet Net USD Value</label>
@@ -429,15 +485,30 @@ export const Widthdraw = () => {
 
                       <div className="row">
                         <div className="col-md-3 col-md-offset-2">
-                          <button
-                            className="btn btn-success"
-                            style={{ marginTop: "10px" }}
-                            id="btnother"
-                            onClick={() => DrawTicket()}
-                          >
-                            {" "}
-                            Withdrawal{" "}
-                          </button>
+                          {isLoadingTrans ? (
+                            <button
+                              className="btn btn-success"
+                              style={{ marginTop: "10px" }}
+                              id="btnother"
+                            >
+                              
+                                <div
+                                  className="loaders"
+                                  style={{ height: "30px", width: "30px" }}
+                                >
+                              </div>
+                              Transaction is in progress
+                            </button>
+                          ) : (
+                            <button
+                              className="btn btn-success"
+                              style={{ marginTop: "10px" }}
+                              id="btnother"
+                              onClick={() => DrawTicket()}
+                            >
+                              Withdrawal
+                            </button>
+                          )}
                         </div>
                       </div>
                     </div>

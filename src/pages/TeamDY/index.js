@@ -33,8 +33,8 @@ export const TeamDY = () => {
                 {
                     sNo: index + 1,
                     from_id: item?.user_id,
-                    levelcount: item?.levelcount,
-                    totalincome: item?.totalincome,
+                    levelcount: item?.Leveltype,
+                    totalincome: item?.Level_income,
                     date: moment(item?.date).format('M/D/YYYY h:m:s A')
                 }
 

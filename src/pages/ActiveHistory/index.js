@@ -55,7 +55,12 @@ export const ActiveHistory = () => {
                             { title: '#', field: 'sNo' },
                             { title: 'Package Amount', field: 'from_id' },
                             { title: 'Remark', field: 'remark' },
-                            { title: 'Txn', field: 'txn' },
+                            { title: 'Txn', field: 'txn' ,
+                        
+                           
+                                render: rowData =><a style={{color:"#fbc50b",textDecoration:'none'}} target="_blank" href={`https://wyzthscan.org/transaction-detail/${rowData?.txn}`}> <span tyle={{width: 50, borderRadius: '50%'}}>View txn</span></a>
+                              
+                        },
                             { title: 'Date', field: 'date' }
                         ]}
                         data={[...dataState]}

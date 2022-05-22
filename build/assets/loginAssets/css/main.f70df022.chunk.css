@@ -5895,7 +5895,6 @@ li:nth-child(3) .mv-icon-group .icon-hexagon {
     }
 
     #member-layout .table-wrapper:before {
-        content: "Drag right/left to view the entire table";
         background: #8b769f;
         color: #fff;
         padding: .5rem 2rem;

@@ -13,3 +13,4 @@ export * from "./MyTeam";
 export * from "./LevelReport";
 export * from "./Widthdraw";
 export * from "./Activate";
+export * from "./Wallets";

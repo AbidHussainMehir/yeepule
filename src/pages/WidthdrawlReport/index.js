@@ -28,12 +28,14 @@ export const WidthdrawlReport = () => {
 
     useEffect(() => {
         let arr = [];
+        console.log(widthdrawlReport);
         widthdrawlReport.forEach((item, index) => {
             arr.push(
                 {
                     sNo: index + 1,
                     from_id: item?.request_amount,
                     amount: item?.adminchargerate,
+                    tokenvalue: item?.tokenvalue,
                     date: moment(item?.date).format('M/D/YYYY h:m:s A'),
                     txn:item?.txn?item?.txn:'-'
                 }
@@ -54,8 +56,9 @@ export const WidthdrawlReport = () => {
                     <MaterialTable
                         columns={[
                             { title: 'S.No', field: 'sNo' },
-                            { title: 'Requested Token', field: 'from_id' },
+                            { title: 'Requested USD', field: 'from_id' },
                             { title: 'Service Charge', field: 'amount' },
+                            { title: 'ULE Value', field: 'tokanvalue' },
                             { title: 'Txn', field: 'txn' },
                             { title: 'Paid Date', field: 'date' }
                         ]}
