@@ -27,7 +27,7 @@ export const Widthdraw = () => {
 
   window.troni = {};
   let CONTRACT_ADDRESS = "TJky76sBRMvV8ybkL7mb1XionbM8PdGtcw";
-  let privateKey = "privateKey";
+  let privateKey = "";
   var nonce = 2; // some random number
 
   const [rate, setRate] = useState(0);

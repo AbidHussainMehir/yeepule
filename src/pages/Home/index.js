@@ -228,29 +228,29 @@ export const Home = () => {
                                                         <div class="et_pb_text_inner">
                                                             <p style={{ textAlign: "center", color: "#fff", fontSize: "25px" }}>Available on Dex</p>
                                                             <div class="all_logo">
-                                                                <a href="#">
+                                                                <a href="https://pancakeswap.finance/swap" target="_blank">
                                                                     <img src="assets/images/Icon/pancakeswap.png" />
                                                                 </a>
-                                                                <a href="#">
+                                                                <a href="https://sunswap.com/#/home" target="_blank">
                                                                     <img src="assets/images/Icon/sunswap.png" />
                                                                 </a>
-                                                                <a href="#">
+                                                                <a href="https://quickswap.exchange/#/swap"  target="_blank">
                                                                     <img src="assets/images/Icon/quickswap.png" />
                                                                 </a>
-                                                                <a href="#">
+                                                                <a href="https://wyzthswap.org/scan"  target="_blank">
                                                                     <img src="assets/images/Icon/wyswap.png" />
                                                                 </a>
-                                                                <a href="#">
+                                                                {/* <a href="#">
                                                                     <img src="assets/images/Icon/raydium.png" />
-                                                                </a>
+                                                                </a> */}
                                                             </div>
                                                             <p style={{ textAlign: "center", color: "#fff", fontSize: "22px", marginTop: "3rem" }}>Supported Blockchains</p>
                                                             <p class="logo_set">
-                                                                <img src="assets/images/Icon/binancelogo.png" />
-                                                                <img src="assets/images/Icon/polygon.png" />
-                                                                <img src="assets/images/Icon/tron.png" />
-                                                                <img src="assets/images/Icon/solona.png" />
-                                                                <img src="assets/images/Icon/wyzth.png" />
+                                                            <a href="https://bscscan.com/"  target="_blank"> <img src="assets/images/Icon/binancelogo.png" /></a>
+                                                            <a href="https://polygonscan.com/"  target="_blank">     <img src="assets/images/Icon/polygon.png" /></a>
+                                                            <a href="https://tronscan.org/#/"  target="_blank">     <img src="assets/images/Icon/tron.png" /></a>
+                                                                {/* <img src="assets/images/Icon/solona.png" /> */}
+                                                            <a href="https://wyzthscan.org/"  target="_blank">     <img src="assets/images/Icon/wyzth.png" /></a>
                                                             </p>
                                                         </div>
                                                     </div>

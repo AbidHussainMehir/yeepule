@@ -34,7 +34,8 @@ export const MyTeam = () => {
                     sNo: index + 1,
                     from_id: item?.uid,
                     pkg_amount: item?.package,
-                    date: moment(item?.top_update).format('M/D/YYYY h:m:s A')
+                    date: moment(item?.top_update).format('M/D/YYYY h:m:s A'),
+                    date:moment(item?.top_update).format('M/D/YYYY h:m:s A')!='Invalid date'?moment(item?.top_update).format('M/D/YYYY h:m:s A'):'Inactive'
                 }
 
             )

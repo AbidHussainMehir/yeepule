@@ -36,7 +36,8 @@ export const ReferralReport = () => {
                     package: item?.packagename,
                     remark: item?.accountnumber,
                     date: moment(item?.edate).format('M/D/YYYY h:m:s A'),
-                    date2: moment(item?.top_update).format('M/D/YYYY h:m:s A')
+                    date2: moment(item?.top_update).format('M/D/YYYY h:m:s A'),
+                    date2:moment(item?.top_update).format('M/D/YYYY h:m:s A')!='Invalid date'?moment(item?.top_update).format('M/D/YYYY h:m:s A'):'Inactive'
                 }
 
             )

@@ -32,7 +32,7 @@ export const DailyYeild = () => {
             arr.push(
                 {
                     sNo: index + 1,
-                    from_id: item?.id,
+                    from_id: item?.uid,
                     amount: item?.plan_amount,
                     date: moment(item?.date).format('M/D/YYYY h:m:s A')
                 }
