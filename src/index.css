@@ -16,3 +16,8 @@ code {
   height: 40px !important;
   width: 90px !important;
 }
+
+.MuiPaginationItem-page.Mui-selected {
+  background-color: #fbc50b !important;
+  color: #ffffff;
+}
