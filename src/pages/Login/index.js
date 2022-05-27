@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { loginAction } from "../../store/actions/login";
 import Web3 from "web3";
 import Model from "./model";
+import Confirm from "./confirm";
 import moment from "moment";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -45,6 +46,8 @@ export const Login = () => {
 
   const [account, setAccount] = useState(null);
   const [registered, setRegistered] = useState(false);
+  const [openLogin, setOpenLogin] = useState(false);
+  // setRegistered ,handleLogin
   const [chainId, setChainId] = useState(null);
   const metamask = async () => {
     let isConnected = false;
@@ -121,6 +124,7 @@ export const Login = () => {
       >
         <ToastContainer />
 
+        {openLogin && <Confirm handleLogin={handleLogin} setRegistered={setOpenLogin} />}
         {registered && <Model setRegistered={setRegistered} />}
         <div class="container">
           <div class="row">
@@ -174,7 +178,7 @@ export const Login = () => {
                         <div class="form-row">
                           <input
                             type="button"
-                            onClick={handleLogin}
+                            onClick={()=>setOpenLogin(true)}
                             class="btn loginbtn"
                             value="Login"
                             id="myBtn25"

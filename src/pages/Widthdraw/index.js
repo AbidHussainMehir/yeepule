@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import axios from "axios";
 import TronWeb from "tronweb";
-
+import Web3 from "web3";
 // ye wala he
 
 export const Widthdraw = () => {
@@ -29,7 +29,49 @@ export const Widthdraw = () => {
   let CONTRACT_ADDRESS = "TJky76sBRMvV8ybkL7mb1XionbM8PdGtcw";
   let privateKey = "";
   var nonce = 2; // some random number
+  const [account, setAccount] = useState(null);
+  const [chainId, setChainId] = useState(null);
+  const metamask = async () => {
+    let isConnected = false;
+    try {
+      if (window.ethereum) {
+        window.web3 = new Web3(window.ethereum);
+        await window.ethereum.enable();
+        isConnected = true;
+      } else if (window.web3) {
+        window.web3 = new Web3(window.web3.currentProvider);
+        isConnected = true;
+      } else {
+        isConnected = false;
+      }
+      if (isConnected === true) {
+        const web3 = window.web3;
+        let accounts = await web3.eth.getAccounts();
+        if (account !== accounts[0]) {
+          setAccount(accounts[0]);
+        }
 
+        let chain = await web3.eth.getChainId();
+        setChainId(chain);
+        if (chain === 303) {
+          // handleLogin2(accounts[0]);
+        }
+        window.ethereum.on("accountsChanged", async function (accounts) {
+          if (account !== accounts[0]) {
+            setAccount(accounts[0]);
+          }
+
+          let chain = await web3.eth.getChainId();
+          setChainId(chain);
+          if (chain === 303) {
+            // handleLogin2(accounts[0]);
+          }
+        });
+      }
+    } catch (error) {
+      console.log("error message", error?.message);
+    }
+  };
   const [rate, setRate] = useState(0);
   const getLiveRate = async () => {
     try {
@@ -130,6 +172,7 @@ export const Widthdraw = () => {
     getUserInfo();
     getLiveRate();
     getBlnce();
+    metamask();
   }, []);
   const getMaxWithdraw = async () => {
     try {
@@ -316,55 +359,88 @@ export const Widthdraw = () => {
                       <h2>Enter Withdrawal Address</h2>
                     </div>
                     <div className="box box-default">
-                      <div className="panel-body">
-                        <br />
-                        <div className="row">
-                          <div className="col-md-2">
-                            <label>Metamask Address</label>
+                      {userInfo?.EthAddress == account ? (
+                        <>
+                          <div className="panel-body">
+                            <br />
+                            <div className="row">
+                              <div className="col-md-2">
+                                <label>Metamask Address</label>
+                              </div>
+                              <div className="col-md-5">
+                                <input
+                                  type="text"
+                                  id="EthAddress"
+                                  name="EthAddress"
+                                  className="form-control mb-20"
+                                  value={userInfo?.EthAddress}
+                                  disabled={true}
+                                  placeholder="Enter ETH Address"
+                                />
+                              </div>
+                            </div>
+                            <br />
+                            <div className="row">
+                              <div className="col-md-2">
+                                <label>TRON Address</label>
+                              </div>
+                              <div className="col-md-5">
+                                <input
+                                  type="text"
+                                  id="TronAddress"
+                                  name="TronAddress"
+                                  value={tronAdd}
+                                  onChange={(e) => setTronAdd(e.target.value)}
+                                  className="form-control mb-20"
+                                  placeholder="Enter TRON Address"
+                                />
+                              </div>
+                            </div>
+                            <div className="row pt-4">
+                              <div className="col-md-3 col-md-offset-2">
+                                <div className="submit_bnt">
+                                  <button
+                                    onClick={addTronWalletAddress}
+                                    id="btnsub2"
+                                    className="btn"
+                                  >
+                                    Submit
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
                           </div>
-                          <div className="col-md-5">
-                            <input
-                              type="text"
-                              id="EthAddress"
-                              name="EthAddress"
-                              className="form-control mb-20"
-                              value={userInfo?.EthAddress}
-                              disabled={true}
-                              placeholder="Enter ETH Address"
-                            />
+                        </>
+                      ) : (
+                        <div className="panel-body">
+                          <div className="row">
+                            <div className="col-md-2">
+                              <label style={{color:'red'}}>Wrong Address</label>
+                            </div>
                           </div>
-                        </div>
-                        <br />
-                        <div className="row">
-                          <div className="col-md-2">
-                            <label>TRON Address</label>
-                          </div>
-                          <div className="col-md-5">
-                            <input
-                              type="text"
-                              id="TronAddress"
-                              name="TronAddress"
-                              value={tronAdd}
-                              onChange={(e) => setTronAdd(e.target.value)}
-                              className="form-control mb-20"
-                              placeholder="Enter TRON Address"
-                            />
-                          </div>
-                        </div>
-                        <div className="row pt-4">
-                          <div className="col-md-3 col-md-offset-2">
-                            <div className="submit_bnt">
-                              <button
-                                onClick={addTronWalletAddress}
-                                id="btnsub2"
-                                className="btn"
-                              >
-                                Submit
-                              </button>
+                          <div className="row ">
+                            <div className="col-md-2">
+                              <label>
+                                Plaese connect Metamask with{" "}
+                                <b>
+                                {`${userInfo?.EthAddress
+                                    ? userInfo?.EthAddress.substr(
+                                        0,
+                                        6
+                                      )
+                                    : ""} ... ${userInfo?.EthAddress
+                                    ? userInfo?.EthAddress.substr(
+                                        userInfo?.EthAddress.length - 6,
+                                        userInfo?.EthAddress.length
+                                      )
+                                    : ""} `}
+                                </b>
+                                Account to add Tron address{" "}
+                              </label>
                             </div>
                           </div>
                         </div>
-                      </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -491,12 +567,10 @@ export const Widthdraw = () => {
                               style={{ marginTop: "10px" }}
                               id="btnother"
                             >
-                              
-                                <div
-                                  className="loaders"
-                                  style={{ height: "30px", width: "30px" }}
-                                >
-                              </div>
+                              <div
+                                className="loaders"
+                                style={{ height: "30px", width: "30px" }}
+                              ></div>
                               Transaction is in progress
                             </button>
                           ) : (
